@@ -13,7 +13,7 @@
 | Commit identity | `Jiaxi Zhao <jiaxi.zhao@u.nus.edu>` |
 | Target hardware | 64 NVIDIA H20 GPUs; cluster topology not yet inspected |
 | Training stack | Megatron Core + Transformer Engine |
-| Current stage | Local context/gradient study from 128 to 4096 completed; awaiting user review. Prior G0-local result is not accepted; H20 experiments have not started |
+| Current stage | Local FP8 numerical emulation and training integration in development. Passing experiments continue pending batch review under the updated user instruction; H20 experiments have not started |
 
 The snapshot is an immutable source reference, not a claim that this upstream
 development version and its dependencies have been validated on the cluster.
@@ -46,15 +46,19 @@ distributed validation and performance measurements.
 
 ## Acceptance gates
 
-The user requested discussion and acceptance at every substantial precision
-milestone on 2026-10-29. Complete each stage's evidence before requesting review.
-Then mark it `awaiting_review` and pause dependent next-stage work until the user
-explicitly accepts it. No gate is accepted by creating this document.
+The user superseded the earlier milestone-pause instruction on 2026-10-29:
+continue implementation, record passing experiments, and defer their review
+until a later batch discussion. Mark new passing experiments
+`passed_pending_batch_review` and continue without individual success reports
+or approval stops. Failures remain failures and must be investigated without
+relaxing thresholds. Historical reports retain their original decisions;
+continued research does not retroactively accept the earlier failed criterion.
 
 | Gate | Evidence required for discussion | Status |
 | --- | --- | --- |
 | G0-local: Apple GPU preliminary reference | [Report and evidence](reports/2026-10-29-local-g0/README.md): fixed protocol, CPU/MPS comparisons, paired short training and fresh-process replay; does not replace H20 G0 | awaiting_review; 1 failed criterion |
 | G0-local-context: context and gradients | [Report and evidence](reports/2026-10-29-context-4k/README.md): 18 constant-token MPS pairs through 4096 byte tokens, same-weight/trajectory gradients, exact replay of the 2K outlier | awaiting_review; 115/115 controls passed; numerical acceptance not granted |
+| G1/G2-local-FP8: numerical emulation | Independently checked E4M3/E5M2 quantization, linear forward/dgrad/wgrad, model integration and short controlled training; no native FP8 claims | in_progress; review deferred by user |
 | G0: BF16 baseline | Pinned environment, exact data/model/run configuration, repeatability, loss and gradient sanity, checkpoint/resume evidence | pending |
 | G1: Operator numerics | Quantize/dequantize reference; forward, input-gradient and weight-gradient GEMM comparisons; rounding, scaling, layout and accumulation checks | pending |
 | G2: Modules and complete step | Linear, MLP, attention, block and full-step comparisons; activations, logits, loss, gradients and parameter-update differences | pending |
@@ -114,6 +118,7 @@ acceptance from silence or from an automated pass.
 | 2026-10-29 | G0-local | Awaiting the user's decision; not accepted | [40/41 criteria passed; update error 0.10269984 exceeds 0.10](reports/2026-10-29-local-g0/README.md). Dependent next-stage work is paused. |
 | 2026-10-29 | G0-local-context | User requested increasing context to 4K and recording gradient differences | Authorizes this additional local study; does not accept or waive the preceding failed criterion, or authorize native FP8 claims. |
 | 2026-10-29 | G0-local-context | Awaiting the user's decision; not accepted | [Completed 4K report](reports/2026-10-29-context-4k/README.md). Final 4K same-weight gradient difference 0.593–1.097%; a 2K trajectory peak of 107.3% has 0.584% same-weight difference on exact replay. Dependent next-stage work is paused. |
+| 2026-10-29 | Review policy, superseding earlier pause | User instructed continued implementation and later batch review of passing precision experiments | Record complete evidence, continue passing stages without per-experiment approval/reporting. Earlier failures and numerical thresholds remain unchanged. Historical pause statements above no longer control continued research. |
 
 The user authorized preliminary local GPU experiments on 2026-10-29 and requested
 atomic feature commits. The [standalone MPS harness](../../tools/precision_local/README.md)

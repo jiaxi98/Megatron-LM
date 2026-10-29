@@ -23,16 +23,17 @@ project. The upstream guidelines below continue to apply within this scope.
   the personal fork, `jiaxi98/Megatron-LM`. Upstream contribution instructions
   apply when an upstream contribution is requested; this research setup does
   not request an upstream PR.
-- **The user explicitly requires a pause at every substantial precision
-  acceptance milestone.** Prepare the completed experiments and a reviewable
-  report, mark the gate `awaiting_review`, and stop dependent next-stage work.
-  Discuss the evidence with the user and obtain their explicit acceptance
-  before advancing. Record the decision and any conditions in the experiment
-  plan. Passing automated checks alone does not constitute acceptance.
+- **Updated user instruction on 2026-10-29: continue implementation and defer
+  review of passing precision experiments.** Record complete evidence and mark
+  passing new experiments `passed_pending_batch_review`, then continue without
+  a per-experiment approval stop or success report. The user will review them
+  together later. Automated success is not user acceptance. Preserve failures
+  and investigate them without weakening thresholds; do not claim failed or
+  untested paths passed. This supersedes the earlier mandatory milestone pause.
 - Gates cover the BF16 baseline, operator numerics, module/full-step numerics,
   distributed/resume correctness, and training convergence. A new FP4 recipe
-  goes through the applicable gates again. Routine fixes and experiments within
-  the current stage may proceed without repeated permission requests.
+  goes through the applicable gates again. Routine fixes and experiments may
+  proceed without repeated permission requests under the updated review policy.
 - Establish numerical tolerances and comparison conditions before evaluating a
   candidate. Never relax thresholds or replace reference results just to make
   a candidate pass. Show failures, uncertainty, and missing evidence in reviews.

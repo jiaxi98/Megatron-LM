@@ -42,8 +42,9 @@ crossing the boundary. All 256 byte values are valid tokens; there is no padding
 
 The local gate is **G0-local**. Its evidence includes CPU FP32 comparisons,
 paired MPS FP32/BF16 short training, repeatability, and checkpoint replay in fresh
-processes. Results must be reviewed with the user before advancing to low-precision
-experiments. The H20 G0 baseline remains pending independently of this gate.
+processes. The user's updated instruction permits continued implementation and
+defers passing-experiment review to a later batch discussion. Historical reports
+and failed criteria remain unchanged. The H20 G0 baseline remains pending.
 
 ## Reference model
 
