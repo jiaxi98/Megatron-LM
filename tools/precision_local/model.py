@@ -7,6 +7,20 @@ from torch import nn
 from torch.nn import functional as F
 
 
+class DeterministicByteEmbedding(nn.Embedding):
+    """Use a dense FP32 gather equivalent for a small vocabulary on MPS.
+
+    MPS embedding_dense_backward has no deterministic implementation. One-hot
+    GEMM avoids that scatter reduction while preserving the lookup and gradient
+    mathematics. This is a reference-only choice, not a large-vocabulary kernel.
+    """
+
+    def forward(self, tokens: torch.Tensor) -> torch.Tensor:
+        with torch.autocast(tokens.device.type, enabled=False):
+            one_hot = F.one_hot(tokens, num_classes=self.num_embeddings).to(self.weight.dtype)
+            return one_hot @ self.weight
+
+
 class RMSNorm(nn.Module):
     """Accumulate normalization in FP32."""
 
@@ -85,7 +99,7 @@ class TinyDecoder(nn.Module):
 
     def __init__(self, config: dict) -> None:
         super().__init__()
-        self.embedding = nn.Embedding(config["vocab_size"], config["width"])
+        self.embedding = DeterministicByteEmbedding(config["vocab_size"], config["width"])
         self.blocks = nn.ModuleList([DecoderBlock(config) for _ in range(config["layers"])])
         self.norm = RMSNorm(config["width"], config["norm_epsilon"])
         self.head = nn.Linear(config["width"], config["vocab_size"], bias=False)

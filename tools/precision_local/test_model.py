@@ -1,7 +1,7 @@
 """CPU correctness checks for the independent reference decoder."""
 
 import torch
-from model import RMSNorm, TinyDecoder, token_loss
+from model import DeterministicByteEmbedding, RMSNorm, TinyDecoder, token_loss
 
 
 def tiny_config():
@@ -62,3 +62,20 @@ def test_bf16_autocast_retains_fp32_parameters_and_logits():
     assert observed == [torch.bfloat16]
     assert output.dtype == torch.float32
     assert all(parameter.dtype == torch.float32 for parameter in model.parameters())
+
+
+def test_deterministic_embedding_matches_lookup_and_repeated_token_gradients():
+    torch.manual_seed(11)
+    reference = torch.nn.Embedding(8, 4)
+    candidate = DeterministicByteEmbedding(8, 4)
+    candidate.load_state_dict(reference.state_dict())
+    tokens = torch.tensor([[2, 2, 7, 0], [7, 2, 1, 2]])
+    upstream_gradient = torch.randn(2, 4, 4)
+    expected = reference(tokens)
+    with torch.autocast("cpu", dtype=torch.bfloat16):
+        actual = candidate(tokens)
+    assert actual.dtype == torch.float32
+    torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+    expected.backward(upstream_gradient)
+    actual.backward(upstream_gradient)
+    torch.testing.assert_close(candidate.weight.grad, reference.weight.grad, rtol=1e-6, atol=1e-6)

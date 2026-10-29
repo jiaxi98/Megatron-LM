@@ -53,6 +53,13 @@ head. Normalization, softmax, residuals, loss and persistent parameters use FP32
 BF16 autocast affects linear layers and attention matrix multiplications. No
 claim of bitwise equivalence to a Megatron model is made at this stage.
 
+The byte embedding uses FP32 one-hot GEMM because PyTorch 2.15 MPS rejects
+`embedding_dense_backward_mps` with strict deterministic algorithms enabled.
+The forward and repeated-token weight gradients are checked against CPU embedding
+lookup. This equivalent but more expensive reference implementation is practical
+for 256 tokens; it is not intended for production-sized vocabularies. The failed
+initial attempt is retained separately, and acceptance thresholds are unchanged.
+
 ```bash
 local/precision/.venv/bin/python -m pytest -q -o addopts= \
   tools/precision_local/test_model.py
