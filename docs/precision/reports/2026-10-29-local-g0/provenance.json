@@ -1,0 +1,36 @@
+{
+  "source_commit": "15a2ba2baa93e36fad7149161af9c5b4ff363a4d",
+  "working_tree": "",
+  "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+  "dependencies_sha256": "28efe1a7dd8098eb03b49d5c4ffe0102b519b637fad5b4cf33f201f4fde77565",
+  "source_files": {
+    "test_model.py": "9b45e4c6d3c65392eca12edcf19c5a987e8d1e339b12a7c9a03c8b78594d0ae9",
+    "baseline.py": "f925db606d1f0f62aa9653a4b8e33a18b06a94681fc42e7a87455852afb883b1",
+    "test_baseline.py": "df8ce0ce8bdb5e5183fd4f74215e0de5068a8b7bccf7d72f9aa74d39f52d1114",
+    "model.py": "3ca1f29745b9f2c2e612acaf8bb68b1bd79068af61b5b68f3adca08113827fc6",
+    "test_suite.py": "14add1814127882ec2c8c2eb27e0fa42e9e49681f7c73fbd9137b7279d2cb3d4",
+    "run_suite.py": "4509367a6d36c1138e3b9f8d445a2602e01157a6ca910f921f98fa9cd1c5722a"
+  },
+  "hardware": {
+    "chip": "Apple M5 Pro",
+    "memory_bytes": 51539607552
+  },
+  "reproduction_command": "local/precision/.venv/bin/python tools/precision_local/run_suite.py --out local/precision/runs/<new-directory>",
+  "raw_artifacts_directory": "local/precision/runs/g0-local-v1-attempt2",
+  "diagnostic_artifact_directory": "local/precision/runs/g0-local-update-diagnosis",
+  "diagnostic_command": "local/precision/.venv/bin/python tools/precision_local/diagnose_update.py --out local/precision/runs/<new-diagnostic-directory>",
+  "report_evidence": {
+    "metrics.json": "de7860532bd12ae29c8fa23f990f31379ec3feccb5bbeb9ef51e2e0e2c717329",
+    "update_diagnosis.json": "ec48a455e7b0059831e6756b62bbaf1ec3741d93972e506ba11591ae7ff48a3a",
+    "protocol.json": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+    "environment.txt": "a525832d9855a71b2f6dcd12c42c85eb0fba817f88548d0d75b839dfe4b3fb6f",
+    "validation_curves.png": "87029acc1a251ab89bc258f9017d26f5b213b67e3cca761e6f4e1c3fbd9670f7"
+  },
+  "first_attempt": {
+    "directory": "local/precision/runs/g0-local-v1",
+    "source_commit": "5f6f38355b18e2181c49512ba92b10b15b4c86c8",
+    "failure": "embedding_dense_backward_mps does not have a deterministic implementation",
+    "log_sha256": "2c3cb26fa05d267a14953161d1ec17866e08d6ec79aa926d9500a3bddda92712",
+    "remedy": "FP32 one-hot GEMM for the byte embedding; original thresholds unchanged"
+  }
+}

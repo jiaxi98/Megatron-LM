@@ -1,0 +1,628 @@
+{
+  "gate": "G0-local",
+  "status": "awaiting_review",
+  "automated_checks_passed": false,
+  "checks": {
+    "audit/complete": true,
+    "replay/complete": true,
+    "audit/fp32/complete": true,
+    "audit/fp32/logits_rel_l2": true,
+    "audit/fp32/grad_rel_l2": true,
+    "audit/fp32/update_rel_l2": true,
+    "audit/bf16/complete": true,
+    "audit/bf16/logits_rel_l2": true,
+    "audit/bf16/grad_rel_l2": true,
+    "audit/bf16/update_rel_l2": false,
+    "pair/17/initial_weights": true,
+    "pair/17/sample_order": true,
+    "train/fp32/17/complete": true,
+    "train/fp32/17/finite": true,
+    "train/fp32/17/loss_drop": true,
+    "train/bf16/17/complete": true,
+    "train/bf16/17/finite": true,
+    "train/bf16/17/loss_drop": true,
+    "pair/17/validation_gap": true,
+    "pair/29/initial_weights": true,
+    "pair/29/sample_order": true,
+    "train/fp32/29/complete": true,
+    "train/fp32/29/finite": true,
+    "train/fp32/29/loss_drop": true,
+    "train/bf16/29/complete": true,
+    "train/bf16/29/finite": true,
+    "train/bf16/29/loss_drop": true,
+    "pair/29/validation_gap": true,
+    "pair/43/initial_weights": true,
+    "pair/43/sample_order": true,
+    "train/fp32/43/complete": true,
+    "train/fp32/43/finite": true,
+    "train/fp32/43/loss_drop": true,
+    "train/bf16/43/complete": true,
+    "train/bf16/43/finite": true,
+    "train/bf16/43/loss_drop": true,
+    "pair/43/validation_gap": true,
+    "replay/fp32-repeat/exact": true,
+    "replay/fp32-resume/exact": true,
+    "replay/bf16-repeat/exact": true,
+    "replay/bf16-resume/exact": true
+  },
+  "failed_checks": [
+    "audit/bf16/update_rel_l2"
+  ],
+  "paired_results": [
+    {
+      "seed": 17,
+      "fp32_validation_loss": 2.4137590527534485,
+      "bf16_validation_loss": 2.414179265499115,
+      "bf16_weights_fp32_eval_loss": 2.414180099964142,
+      "absolute_execution_loss_gap": 0.0004202127456665039,
+      "absolute_fp32_eval_loss_gap": 0.0004210472106933594
+    },
+    {
+      "seed": 29,
+      "fp32_validation_loss": 2.435080885887146,
+      "bf16_validation_loss": 2.432668924331665,
+      "bf16_weights_fp32_eval_loss": 2.4326050877571106,
+      "absolute_execution_loss_gap": 0.002411961555480957,
+      "absolute_fp32_eval_loss_gap": 0.0024757981300354004
+    },
+    {
+      "seed": 43,
+      "fp32_validation_loss": 2.43290513753891,
+      "bf16_validation_loss": 2.4334003925323486,
+      "bf16_weights_fp32_eval_loss": 2.43340265750885,
+      "absolute_execution_loss_gap": 0.0004952549934387207,
+      "absolute_fp32_eval_loss_gap": 0.0004975199699401855
+    }
+  ],
+  "replay_differences": {
+    "fp32-repeat": [],
+    "fp32-resume": [],
+    "bf16-repeat": [],
+    "bf16-resume": []
+  },
+  "scope": "Local reference only. H20 Megatron/TE baseline and G1-G4 remain pending.",
+  "audit": {
+    "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+    "environment": {
+      "python": "3.12.14",
+      "torch": "2.15.0",
+      "macos": "26.6",
+      "architecture": "arm64",
+      "mps_available": true,
+      "cuda_available": false,
+      "mps_fallback": "0",
+      "mps_fast_math": "0",
+      "deterministic_algorithms": true,
+      "source_commit": "15a2ba2baa93e36fad7149161af9c5b4ff363a4d",
+      "working_tree": ""
+    },
+    "comparisons": {
+      "fp32": {
+        "loss": 5.562718391418457,
+        "cpu_loss": 5.562718391418457,
+        "metrics": {
+          "logits": {
+            "rel_l2": 5.108598756671879e-07,
+            "max_abs": 9.5367431640625e-07,
+            "cosine": 0.9999999999998139
+          },
+          "grad": {
+            "rel_l2": 2.512290338818037e-07,
+            "max_abs": 1.341104507446289e-07,
+            "cosine": 0.9999999999998793
+          },
+          "update": {
+            "rel_l2": 3.365353440440857e-05,
+            "max_abs": 1.312245149165392e-05,
+            "cosine": 0.9999999994346099
+          }
+        },
+        "checks": {
+          "logits_rel_l2": true,
+          "grad_rel_l2": true,
+          "update_rel_l2": true
+        }
+      },
+      "bf16": {
+        "loss": 5.562119483947754,
+        "cpu_loss": 5.562718391418457,
+        "metrics": {
+          "logits": {
+            "rel_l2": 0.006332795639050106,
+            "max_abs": 0.010204970836639404,
+            "cosine": 0.9999799576939509
+          },
+          "grad": {
+            "rel_l2": 0.005847469045906143,
+            "max_abs": 0.001955341547727585,
+            "cosine": 0.9999829083809465
+          },
+          "update": {
+            "rel_l2": 0.1026998445794322,
+            "max_abs": 0.001199927181005478,
+            "cosine": 0.9947263631963987
+          }
+        },
+        "checks": {
+          "logits_rel_l2": true,
+          "grad_rel_l2": true,
+          "update_rel_l2": false
+        }
+      }
+    }
+  },
+  "runs": {
+    "fp32-17": {
+      "environment": {
+        "python": "3.12.14",
+        "torch": "2.15.0",
+        "macos": "26.6",
+        "architecture": "arm64",
+        "mps_available": true,
+        "cuda_available": false,
+        "mps_fallback": "0",
+        "mps_fast_math": "0",
+        "deterministic_algorithms": true,
+        "source_commit": "15a2ba2baa93e36fad7149161af9c5b4ff363a4d",
+        "working_tree": ""
+      },
+      "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+      "device": "mps",
+      "dtype": "fp32",
+      "seed": 17,
+      "parameter_count": 3541248,
+      "actual_projection_dtypes": [
+        "torch.float32"
+      ],
+      "persistent_dtype": "torch.float32",
+      "initial_parameters_sha256": "20ec33cd2ad72acaafebbde25f55f1946f1187d00dd302b78bcc7106a26d2d52",
+      "sample_indices_sha256": "37bd10be913c16e84f0e1b149602e22958d0eeb4374758743124ed10294974d2",
+      "validation": [
+        {
+          "step": 0,
+          "loss": 5.57607102394104
+        },
+        {
+          "step": 32,
+          "loss": 3.0665308833122253
+        },
+        {
+          "step": 64,
+          "loss": 2.6193923354148865
+        },
+        {
+          "step": 96,
+          "loss": 2.48313707113266
+        },
+        {
+          "step": 128,
+          "loss": 2.4137590527534485
+        }
+      ],
+      "validation_fp32_eval": 2.4137590527534485,
+      "start_step": 0,
+      "elapsed_seconds": 2.0363933340004223,
+      "executed_tokens": 131072,
+      "sampled_peak_live_mps_bytes": 56873472,
+      "timing_scope": "Includes training, in-loop evaluation, checkpoint writes and diagnostic synchronizations; excludes setup/initial validation/final fp32 evaluation. Not a throughput benchmark."
+    },
+    "bf16-17": {
+      "environment": {
+        "python": "3.12.14",
+        "torch": "2.15.0",
+        "macos": "26.6",
+        "architecture": "arm64",
+        "mps_available": true,
+        "cuda_available": false,
+        "mps_fallback": "0",
+        "mps_fast_math": "0",
+        "deterministic_algorithms": true,
+        "source_commit": "15a2ba2baa93e36fad7149161af9c5b4ff363a4d",
+        "working_tree": ""
+      },
+      "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+      "device": "mps",
+      "dtype": "bf16",
+      "seed": 17,
+      "parameter_count": 3541248,
+      "actual_projection_dtypes": [
+        "torch.bfloat16"
+      ],
+      "persistent_dtype": "torch.float32",
+      "initial_parameters_sha256": "20ec33cd2ad72acaafebbde25f55f1946f1187d00dd302b78bcc7106a26d2d52",
+      "sample_indices_sha256": "37bd10be913c16e84f0e1b149602e22958d0eeb4374758743124ed10294974d2",
+      "validation": [
+        {
+          "step": 0,
+          "loss": 5.5756237506866455
+        },
+        {
+          "step": 32,
+          "loss": 3.0667057633399963
+        },
+        {
+          "step": 64,
+          "loss": 2.6202206015586853
+        },
+        {
+          "step": 96,
+          "loss": 2.483537971973419
+        },
+        {
+          "step": 128,
+          "loss": 2.414179265499115
+        }
+      ],
+      "validation_fp32_eval": 2.414180099964142,
+      "start_step": 0,
+      "elapsed_seconds": 1.7641164579999895,
+      "executed_tokens": 131072,
+      "sampled_peak_live_mps_bytes": 56873472,
+      "timing_scope": "Includes training, in-loop evaluation, checkpoint writes and diagnostic synchronizations; excludes setup/initial validation/final fp32 evaluation. Not a throughput benchmark."
+    },
+    "fp32-29": {
+      "environment": {
+        "python": "3.12.14",
+        "torch": "2.15.0",
+        "macos": "26.6",
+        "architecture": "arm64",
+        "mps_available": true,
+        "cuda_available": false,
+        "mps_fallback": "0",
+        "mps_fast_math": "0",
+        "deterministic_algorithms": true,
+        "source_commit": "15a2ba2baa93e36fad7149161af9c5b4ff363a4d",
+        "working_tree": ""
+      },
+      "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+      "device": "mps",
+      "dtype": "fp32",
+      "seed": 29,
+      "parameter_count": 3541248,
+      "actual_projection_dtypes": [
+        "torch.float32"
+      ],
+      "persistent_dtype": "torch.float32",
+      "initial_parameters_sha256": "57f8e3b9250049b2397b691c3850e9e21fb267d38b0536331f7d2359656a5c63",
+      "sample_indices_sha256": "3a55ec0cdc286989fa89914bd4102d7145f7e06f5b931c452ba70257979767a1",
+      "validation": [
+        {
+          "step": 0,
+          "loss": 5.578116536140442
+        },
+        {
+          "step": 32,
+          "loss": 3.1535913944244385
+        },
+        {
+          "step": 64,
+          "loss": 2.592672824859619
+        },
+        {
+          "step": 96,
+          "loss": 2.471359431743622
+        },
+        {
+          "step": 128,
+          "loss": 2.435080885887146
+        }
+      ],
+      "validation_fp32_eval": 2.435080885887146,
+      "start_step": 0,
+      "elapsed_seconds": 1.9108697089995985,
+      "executed_tokens": 131072,
+      "sampled_peak_live_mps_bytes": 56873472,
+      "timing_scope": "Includes training, in-loop evaluation, checkpoint writes and diagnostic synchronizations; excludes setup/initial validation/final fp32 evaluation. Not a throughput benchmark."
+    },
+    "bf16-29": {
+      "environment": {
+        "python": "3.12.14",
+        "torch": "2.15.0",
+        "macos": "26.6",
+        "architecture": "arm64",
+        "mps_available": true,
+        "cuda_available": false,
+        "mps_fallback": "0",
+        "mps_fast_math": "0",
+        "deterministic_algorithms": true,
+        "source_commit": "15a2ba2baa93e36fad7149161af9c5b4ff363a4d",
+        "working_tree": ""
+      },
+      "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+      "device": "mps",
+      "dtype": "bf16",
+      "seed": 29,
+      "parameter_count": 3541248,
+      "actual_projection_dtypes": [
+        "torch.bfloat16"
+      ],
+      "persistent_dtype": "torch.float32",
+      "initial_parameters_sha256": "57f8e3b9250049b2397b691c3850e9e21fb267d38b0536331f7d2359656a5c63",
+      "sample_indices_sha256": "3a55ec0cdc286989fa89914bd4102d7145f7e06f5b931c452ba70257979767a1",
+      "validation": [
+        {
+          "step": 0,
+          "loss": 5.577939391136169
+        },
+        {
+          "step": 32,
+          "loss": 3.1514689326286316
+        },
+        {
+          "step": 64,
+          "loss": 2.5901283025741577
+        },
+        {
+          "step": 96,
+          "loss": 2.4686325788497925
+        },
+        {
+          "step": 128,
+          "loss": 2.432668924331665
+        }
+      ],
+      "validation_fp32_eval": 2.4326050877571106,
+      "start_step": 0,
+      "elapsed_seconds": 1.764769041999898,
+      "executed_tokens": 131072,
+      "sampled_peak_live_mps_bytes": 56873472,
+      "timing_scope": "Includes training, in-loop evaluation, checkpoint writes and diagnostic synchronizations; excludes setup/initial validation/final fp32 evaluation. Not a throughput benchmark."
+    },
+    "fp32-43": {
+      "environment": {
+        "python": "3.12.14",
+        "torch": "2.15.0",
+        "macos": "26.6",
+        "architecture": "arm64",
+        "mps_available": true,
+        "cuda_available": false,
+        "mps_fallback": "0",
+        "mps_fast_math": "0",
+        "deterministic_algorithms": true,
+        "source_commit": "15a2ba2baa93e36fad7149161af9c5b4ff363a4d",
+        "working_tree": ""
+      },
+      "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+      "device": "mps",
+      "dtype": "fp32",
+      "seed": 43,
+      "parameter_count": 3541248,
+      "actual_projection_dtypes": [
+        "torch.float32"
+      ],
+      "persistent_dtype": "torch.float32",
+      "initial_parameters_sha256": "af68f617897ec8f795f3987f16512bc7c32084994c597182ff6891175fc71236",
+      "sample_indices_sha256": "bf3e11368ce8d6e6e06b3c7ee2190f09d5a4821689123624aae68078ee01867a",
+      "validation": [
+        {
+          "step": 0,
+          "loss": 5.49122166633606
+        },
+        {
+          "step": 32,
+          "loss": 3.1521301865577698
+        },
+        {
+          "step": 64,
+          "loss": 2.6391618847846985
+        },
+        {
+          "step": 96,
+          "loss": 2.4876964688301086
+        },
+        {
+          "step": 128,
+          "loss": 2.43290513753891
+        }
+      ],
+      "validation_fp32_eval": 2.43290513753891,
+      "start_step": 0,
+      "elapsed_seconds": 1.9686161660001744,
+      "executed_tokens": 131072,
+      "sampled_peak_live_mps_bytes": 56873472,
+      "timing_scope": "Includes training, in-loop evaluation, checkpoint writes and diagnostic synchronizations; excludes setup/initial validation/final fp32 evaluation. Not a throughput benchmark."
+    },
+    "bf16-43": {
+      "environment": {
+        "python": "3.12.14",
+        "torch": "2.15.0",
+        "macos": "26.6",
+        "architecture": "arm64",
+        "mps_available": true,
+        "cuda_available": false,
+        "mps_fallback": "0",
+        "mps_fast_math": "0",
+        "deterministic_algorithms": true,
+        "source_commit": "15a2ba2baa93e36fad7149161af9c5b4ff363a4d",
+        "working_tree": ""
+      },
+      "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+      "device": "mps",
+      "dtype": "bf16",
+      "seed": 43,
+      "parameter_count": 3541248,
+      "actual_projection_dtypes": [
+        "torch.bfloat16"
+      ],
+      "persistent_dtype": "torch.float32",
+      "initial_parameters_sha256": "af68f617897ec8f795f3987f16512bc7c32084994c597182ff6891175fc71236",
+      "sample_indices_sha256": "bf3e11368ce8d6e6e06b3c7ee2190f09d5a4821689123624aae68078ee01867a",
+      "validation": [
+        {
+          "step": 0,
+          "loss": 5.491296172142029
+        },
+        {
+          "step": 32,
+          "loss": 3.1520326137542725
+        },
+        {
+          "step": 64,
+          "loss": 2.6399935483932495
+        },
+        {
+          "step": 96,
+          "loss": 2.4878426790237427
+        },
+        {
+          "step": 128,
+          "loss": 2.4334003925323486
+        }
+      ],
+      "validation_fp32_eval": 2.43340265750885,
+      "start_step": 0,
+      "elapsed_seconds": 1.7752935839998827,
+      "executed_tokens": 131072,
+      "sampled_peak_live_mps_bytes": 56873472,
+      "timing_scope": "Includes training, in-loop evaluation, checkpoint writes and diagnostic synchronizations; excludes setup/initial validation/final fp32 evaluation. Not a throughput benchmark."
+    }
+  },
+  "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+  "artifacts": [
+    {
+      "path": "bf16-17/step-128.pt",
+      "bytes": 42555270,
+      "sha256": "ab6ab0a7c3d7012c8a90143a1be026598df28c041e2a4ef1ffd0fe0525ad8b4b"
+    },
+    {
+      "path": "bf16-17/step-64.pt",
+      "bytes": 42547841,
+      "sha256": "94072fab819d0146816dfc1ae79dbb916ee59667d65f8b40864322cf937d954e"
+    },
+    {
+      "path": "bf16-17-repeat/step-128.pt",
+      "bytes": 42555270,
+      "sha256": "ab6ab0a7c3d7012c8a90143a1be026598df28c041e2a4ef1ffd0fe0525ad8b4b"
+    },
+    {
+      "path": "bf16-17-repeat/step-64.pt",
+      "bytes": 42547841,
+      "sha256": "94072fab819d0146816dfc1ae79dbb916ee59667d65f8b40864322cf937d954e"
+    },
+    {
+      "path": "bf16-17-resume/step-128.pt",
+      "bytes": 42555270,
+      "sha256": "7cd0a18e7500e05c613903cfc4223bc8e02eb838341464e749a5d58931d1c599"
+    },
+    {
+      "path": "bf16-29/step-128.pt",
+      "bytes": 42555206,
+      "sha256": "79ee0d91b4ce52db45b110a4462d18e7b574f9bc6c2d3e472256be3690b568c0"
+    },
+    {
+      "path": "bf16-29/step-64.pt",
+      "bytes": 42547777,
+      "sha256": "ccb4e4907e621e2457013f93dcbd10fc7cba90abcff96062f0a8f2db15b79ec7"
+    },
+    {
+      "path": "bf16-43/step-128.pt",
+      "bytes": 42555206,
+      "sha256": "59be6ee434dd82cfafb695592e1933d031dfdbe0c81ca6e1ce78928aa636999e"
+    },
+    {
+      "path": "bf16-43/step-64.pt",
+      "bytes": 42547777,
+      "sha256": "327638affc6bc315a68e58e90559011be300935d7b2fb3c2681a5147271557c7"
+    },
+    {
+      "path": "fp32-17/step-128.pt",
+      "bytes": 42555270,
+      "sha256": "f4687728dde41bba44cd86ab34bbf8ab8fb1350a2f5f5ae9876289f03186853d"
+    },
+    {
+      "path": "fp32-17/step-64.pt",
+      "bytes": 42547841,
+      "sha256": "b030715c97c631b5cc523c6fb0b6ab72800fb4a35857ec4d3bd18ac649218fd9"
+    },
+    {
+      "path": "fp32-17-repeat/step-128.pt",
+      "bytes": 42555270,
+      "sha256": "f4687728dde41bba44cd86ab34bbf8ab8fb1350a2f5f5ae9876289f03186853d"
+    },
+    {
+      "path": "fp32-17-repeat/step-64.pt",
+      "bytes": 42547841,
+      "sha256": "b030715c97c631b5cc523c6fb0b6ab72800fb4a35857ec4d3bd18ac649218fd9"
+    },
+    {
+      "path": "fp32-17-resume/step-128.pt",
+      "bytes": 42555270,
+      "sha256": "fc534c42dc9cd50905e6e10342ebd08e61dd880ec1f1eae495b0f19bc8c27b8a"
+    },
+    {
+      "path": "fp32-29/step-128.pt",
+      "bytes": 42555206,
+      "sha256": "f6783dd8b56bc6dfd711f5e46b685f5b8f37b6ce13ea6dbfa45b84309e57b7a9"
+    },
+    {
+      "path": "fp32-29/step-64.pt",
+      "bytes": 42547777,
+      "sha256": "000bdf53abe32d2fa99da8a3a30c957dd4cae8e803435cd65455d756fec547c7"
+    },
+    {
+      "path": "fp32-43/step-128.pt",
+      "bytes": 42555206,
+      "sha256": "3505e182ed2716d1bda84044b71f9643632190bf7dd95999205e151bdcbf2318"
+    },
+    {
+      "path": "fp32-43/step-64.pt",
+      "bytes": 42547777,
+      "sha256": "3a9cdb768ad25011ba8e732fd06eb920822cd8e5a8353ab0f5ad5b2bed2b8b62"
+    },
+    {
+      "path": "audit/result.json",
+      "bytes": 1867,
+      "sha256": "7a43c999a0a8a17b59d3593408e0b44e4d12157ae29954d92f3d4b0fbb623a12"
+    },
+    {
+      "path": "bf16-17/result.json",
+      "bytes": 19073,
+      "sha256": "89982497a4101ddcf16bc39f5dadfb911e3ec13f4d7f73c16d45000a28024471"
+    },
+    {
+      "path": "bf16-17-repeat/result.json",
+      "bytes": 19073,
+      "sha256": "08e86c32c7131b6a98f82c51c1719218ee2bd9d0648e4ef761aa082e669eb692"
+    },
+    {
+      "path": "bf16-17-resume/result.json",
+      "bytes": 19073,
+      "sha256": "053ee086b2d6d51b45f20125aec016702d936e60c4b39f8f3dd261b3d479a297"
+    },
+    {
+      "path": "bf16-29/result.json",
+      "bytes": 19075,
+      "sha256": "cc51146c1f2acb08ed763f1f5c6927018bc439088f408802e189d62c754fd686"
+    },
+    {
+      "path": "bf16-43/result.json",
+      "bytes": 19059,
+      "sha256": "e40d329161a52e60985ccd21e9a95ad272f199df8197c655ecaf64907c9c0fc1"
+    },
+    {
+      "path": "fp32-17/result.json",
+      "bytes": 19065,
+      "sha256": "7c37d202e5686448b6503f096c58a8d2f990b4422eefc5a4efe2941d32a72ace"
+    },
+    {
+      "path": "fp32-17-repeat/result.json",
+      "bytes": 19064,
+      "sha256": "e498d6b7a528c776de93bc86d49b97afc6b148c5668e99dd0ae4d24ac79d3b48"
+    },
+    {
+      "path": "fp32-17-resume/result.json",
+      "bytes": 19065,
+      "sha256": "6e837b202e07c0634454aecfae5fe40af6fc1f20dab626584f532bdf70ebbb2d"
+    },
+    {
+      "path": "fp32-29/result.json",
+      "bytes": 19080,
+      "sha256": "1bebe01ccc2100a2b8b93f6e94ece011bf6efc012cadbe8d44cc4f5d47b87508"
+    },
+    {
+      "path": "fp32-43/result.json",
+      "bytes": 19068,
+      "sha256": "a7d0173df29b7b23d51a7bbe34a85b4920c25fb6ed2e1e52bb2028038e831465"
+    }
+  ]
+}

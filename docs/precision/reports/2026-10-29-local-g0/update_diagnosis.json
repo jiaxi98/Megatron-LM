@@ -1,0 +1,251 @@
+{
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.15.0",
+    "macos": "26.6",
+    "architecture": "arm64",
+    "mps_available": true,
+    "cuda_available": false,
+    "mps_fallback": "0",
+    "mps_fast_math": "0",
+    "deterministic_algorithms": true,
+    "source_commit": "9ef42ece2a37e6b55612094258b434052739681d",
+    "working_tree": ""
+  },
+  "protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+  "seed": 17,
+  "purpose": "Post-run diagnosis only; original 0.10 update-error threshold remains failed and unchanged.",
+  "update_metrics": {
+    "rel_l2": 0.1026998445794322,
+    "max_abs": 0.001199927181005478,
+    "cosine": 0.9947263631963987
+  },
+  "attribution": {
+    "elements": 3541248,
+    "sign_flip_count": 9700,
+    "sign_flip_fraction": 0.0027391473288512977,
+    "sign_flip_update_error_energy_fraction": 0.996781730888996,
+    "analytic_first_adam_residual_rel_l2": 9.600998862021503e-06,
+    "median_abs_reference_gradient_on_flips": 1.992385932680918e-06,
+    "median_abs_reference_gradient_all": 0.00038273786776699126
+  },
+  "parameters": [
+    {
+      "parameter": "blocks.3.up.weight",
+      "gradient_rel_l2": 0.007847135307456036,
+      "update_rel_l2": 0.11578886067078341,
+      "update_error_energy_fraction": 0.07164427334889831,
+      "gradient_sign_flip_fraction": 0.0035044352213541665
+    },
+    {
+      "parameter": "blocks.3.down.weight",
+      "gradient_rel_l2": 0.0075033526696079945,
+      "update_rel_l2": 0.10917420391199961,
+      "update_error_energy_fraction": 0.06369334507374598,
+      "gradient_sign_flip_fraction": 0.0030924479166666665
+    },
+    {
+      "parameter": "blocks.2.gate.weight",
+      "gradient_rel_l2": 0.007877458654150845,
+      "update_rel_l2": 0.1089967401875739,
+      "update_error_energy_fraction": 0.0634904182719879,
+      "gradient_sign_flip_fraction": 0.0031026204427083335
+    },
+    {
+      "parameter": "blocks.3.gate.weight",
+      "gradient_rel_l2": 0.008111347349346404,
+      "update_rel_l2": 0.10880706483981657,
+      "update_error_energy_fraction": 0.06326385005092945,
+      "gradient_sign_flip_fraction": 0.0030975341796875
+    },
+    {
+      "parameter": "blocks.2.up.weight",
+      "gradient_rel_l2": 0.007948692404707998,
+      "update_rel_l2": 0.10464296199835432,
+      "update_error_energy_fraction": 0.058522095131430266,
+      "gradient_sign_flip_fraction": 0.002838134765625
+    },
+    {
+      "parameter": "blocks.0.down.weight",
+      "gradient_rel_l2": 0.007062497908584288,
+      "update_rel_l2": 0.10443675557535548,
+      "update_error_energy_fraction": 0.058309144652762455,
+      "gradient_sign_flip_fraction": 0.0027669270833333335
+    },
+    {
+      "parameter": "blocks.1.up.weight",
+      "gradient_rel_l2": 0.007571558738153328,
+      "update_rel_l2": 0.10382426006610938,
+      "update_error_energy_fraction": 0.05761643167546864,
+      "gradient_sign_flip_fraction": 0.002777099609375
+    },
+    {
+      "parameter": "blocks.1.gate.weight",
+      "gradient_rel_l2": 0.007313851131905928,
+      "update_rel_l2": 0.1034437631438494,
+      "update_error_energy_fraction": 0.0571958296520173,
+      "gradient_sign_flip_fraction": 0.0027414957682291665
+    },
+    {
+      "parameter": "blocks.1.qkv.weight",
+      "gradient_rel_l2": 0.005698518067671558,
+      "update_rel_l2": 0.10300809061905697,
+      "update_error_energy_fraction": 0.056639458139089285,
+      "gradient_sign_flip_fraction": 0.0029398600260416665
+    },
+    {
+      "parameter": "blocks.2.down.weight",
+      "gradient_rel_l2": 0.008030677291254989,
+      "update_rel_l2": 0.10158880087207503,
+      "update_error_energy_fraction": 0.0551548447684335,
+      "gradient_sign_flip_fraction": 0.0026702880859375
+    },
+    {
+      "parameter": "blocks.0.gate.weight",
+      "gradient_rel_l2": 0.007640878781042995,
+      "update_rel_l2": 0.10083603092751853,
+      "update_error_energy_fraction": 0.05435719319820416,
+      "gradient_sign_flip_fraction": 0.0025838216145833335
+    },
+    {
+      "parameter": "blocks.0.up.weight",
+      "gradient_rel_l2": 0.0070721960709007395,
+      "update_rel_l2": 0.10069035976869858,
+      "update_error_energy_fraction": 0.0541996601824404,
+      "gradient_sign_flip_fraction": 0.0025787353515625
+    },
+    {
+      "parameter": "blocks.0.qkv.weight",
+      "gradient_rel_l2": 0.006182083842248339,
+      "update_rel_l2": 0.09994897384657621,
+      "update_error_energy_fraction": 0.053377945418212384,
+      "gradient_sign_flip_fraction": 0.0026397705078125
+    },
+    {
+      "parameter": "blocks.3.qkv.weight",
+      "gradient_rel_l2": 0.005781898673867311,
+      "update_rel_l2": 0.10006604315726027,
+      "update_error_energy_fraction": 0.05332507590264015,
+      "gradient_sign_flip_fraction": 0.003082275390625
+    },
+    {
+      "parameter": "blocks.1.down.weight",
+      "gradient_rel_l2": 0.006638978655516572,
+      "update_rel_l2": 0.09718957425868449,
+      "update_error_energy_fraction": 0.05049053983838676,
+      "gradient_sign_flip_fraction": 0.0024261474609375
+    },
+    {
+      "parameter": "blocks.2.qkv.weight",
+      "gradient_rel_l2": 0.005640123530354813,
+      "update_rel_l2": 0.09717412452000669,
+      "update_error_energy_fraction": 0.05033936930697782,
+      "gradient_sign_flip_fraction": 0.0027974446614583335
+    },
+    {
+      "parameter": "blocks.0.projection.weight",
+      "gradient_rel_l2": 0.006057823870772694,
+      "update_rel_l2": 0.09991925840839666,
+      "update_error_energy_fraction": 0.017793266334774616,
+      "gradient_sign_flip_fraction": 0.0025177001953125
+    },
+    {
+      "parameter": "blocks.1.projection.weight",
+      "gradient_rel_l2": 0.005575318991608186,
+      "update_rel_l2": 0.09557331677822482,
+      "update_error_energy_fraction": 0.01627841205951615,
+      "gradient_sign_flip_fraction": 0.0023040771484375
+    },
+    {
+      "parameter": "blocks.3.projection.weight",
+      "gradient_rel_l2": 0.005882385329104886,
+      "update_rel_l2": 0.09490377546937448,
+      "update_error_energy_fraction": 0.016051295469152457,
+      "gradient_sign_flip_fraction": 0.0022735595703125
+    },
+    {
+      "parameter": "blocks.2.projection.weight",
+      "gradient_rel_l2": 0.005444938652261074,
+      "update_rel_l2": 0.08917816752944199,
+      "update_error_energy_fraction": 0.014173439158036795,
+      "gradient_sign_flip_fraction": 0.0019989013671875
+    },
+    {
+      "parameter": "head.weight",
+      "gradient_rel_l2": 0.005079758902907612,
+      "update_rel_l2": 0.08084937749349352,
+      "update_error_energy_fraction": 0.011649121644296354,
+      "gradient_sign_flip_fraction": 0.00164794921875
+    },
+    {
+      "parameter": "embedding.weight",
+      "gradient_rel_l2": 0.005216586627046508,
+      "update_rel_l2": 0.062320612558145125,
+      "update_error_energy_fraction": 0.0014059714460974823,
+      "gradient_sign_flip_fraction": 0.0001983642578125
+    },
+    {
+      "parameter": "blocks.3.ffn_norm.weight",
+      "gradient_rel_l2": 0.008370724893605014,
+      "update_rel_l2": 0.21438144878413132,
+      "update_error_energy_fraction": 0.00032205409004715696,
+      "gradient_sign_flip_fraction": 0.01171875
+    },
+    {
+      "parameter": "blocks.3.attention_norm.weight",
+      "gradient_rel_l2": 0.006154559759685844,
+      "update_rel_l2": 0.17340921982558793,
+      "update_error_energy_fraction": 0.0002169452131813586,
+      "gradient_sign_flip_fraction": 0.0078125
+    },
+    {
+      "parameter": "blocks.0.ffn_norm.weight",
+      "gradient_rel_l2": 0.007464965214592808,
+      "update_rel_l2": 0.1730788848169038,
+      "update_error_energy_fraction": 0.00021679338295024417,
+      "gradient_sign_flip_fraction": 0.0078125
+    },
+    {
+      "parameter": "blocks.2.ffn_norm.weight",
+      "gradient_rel_l2": 0.007773974526848984,
+      "update_rel_l2": 0.1561068008745998,
+      "update_error_energy_fraction": 0.00016557439485144013,
+      "gradient_sign_flip_fraction": 0.0078125
+    },
+    {
+      "parameter": "blocks.1.attention_norm.weight",
+      "gradient_rel_l2": 0.00556695122727017,
+      "update_rel_l2": 0.12460447300424056,
+      "update_error_energy_fraction": 0.00010765176660399827,
+      "gradient_sign_flip_fraction": 0.00390625
+    },
+    {
+      "parameter": "blocks.1.ffn_norm.weight",
+      "gradient_rel_l2": 0.008472455733478533,
+      "update_rel_l2": 0.0002105710881486124,
+      "update_error_energy_fraction": 3.1078105192631434e-10,
+      "gradient_sign_flip_fraction": 0.0
+    },
+    {
+      "parameter": "norm.weight",
+      "gradient_rel_l2": 0.0045676039730987135,
+      "update_rel_l2": 0.00011348777507330302,
+      "update_error_energy_fraction": 9.09799452530402e-11,
+      "gradient_sign_flip_fraction": 0.0
+    },
+    {
+      "parameter": "blocks.0.attention_norm.weight",
+      "gradient_rel_l2": 0.005506843139440245,
+      "update_rel_l2": 5.222249199000552e-05,
+      "update_error_energy_fraction": 1.9591551632660575e-11,
+      "gradient_sign_flip_fraction": 0.0
+    },
+    {
+      "parameter": "blocks.2.attention_norm.weight",
+      "gradient_rel_l2": 0.005836939720840799,
+      "update_rel_l2": 3.284448161248481e-05,
+      "update_error_energy_fraction": 7.514567749513646e-12,
+      "gradient_sign_flip_fraction": 0.0
+    }
+  ]
+}

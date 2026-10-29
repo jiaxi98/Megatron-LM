@@ -13,7 +13,7 @@
 | Commit identity | `Jiaxi Zhao <jiaxi.zhao@u.nus.edu>` |
 | Target hardware | 64 NVIDIA H20 GPUs; cluster topology not yet inspected |
 | Training stack | Megatron Core + Transformer Engine |
-| Current stage | Implementing the authorized local MPS baseline; H20 experiments have not started |
+| Current stage | G0-local awaiting user review: 40/41 checks passed; BF16 first-step update error exceeded its bound. H20 experiments have not started |
 
 The snapshot is an immutable source reference, not a claim that this upstream
 development version and its dependencies have been validated on the cluster.
@@ -53,7 +53,7 @@ explicitly accepts it. No gate is accepted by creating this document.
 
 | Gate | Evidence required for discussion | Status |
 | --- | --- | --- |
-| G0-local: Apple GPU preliminary reference | Fixed local protocol, CPU/MPS comparisons, paired short FP32/BF16 training and fresh-process replay; does not replace H20 G0 | in_progress |
+| G0-local: Apple GPU preliminary reference | [Report and evidence](reports/2026-10-29-local-g0/README.md): fixed protocol, CPU/MPS comparisons, paired short training and fresh-process replay; does not replace H20 G0 | awaiting_review; 1 failed criterion |
 | G0: BF16 baseline | Pinned environment, exact data/model/run configuration, repeatability, loss and gradient sanity, checkpoint/resume evidence | pending |
 | G1: Operator numerics | Quantize/dequantize reference; forward, input-gradient and weight-gradient GEMM comparisons; rounding, scaling, layout and accumulation checks | pending |
 | G2: Modules and complete step | Linear, MLP, attention, block and full-step comparisons; activations, logits, loss, gradients and parameter-update differences | pending |
@@ -110,7 +110,7 @@ acceptance from silence or from an automated pass.
 
 | Date | Gate | User decision | Conditions / evidence |
 | --- | --- | --- | --- |
-| — | — | No precision acceptance reviews completed | Repository setup only |
+| 2026-10-29 | G0-local | Awaiting the user's decision; not accepted | [40/41 criteria passed; update error 0.10269984 exceeds 0.10](reports/2026-10-29-local-g0/README.md). Dependent next-stage work is paused. |
 
 The user authorized preliminary local GPU experiments on 2026-10-29 and requested
 atomic feature commits. The [standalone MPS harness](../../tools/precision_local/README.md)
