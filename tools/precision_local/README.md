@@ -92,3 +92,23 @@ the protocol's paired-loss bound.
 Elapsed time includes compilation, diagnostic synchronization, in-loop validation
 and checkpoint I/O. It is a diagnostic runtime, not a steady-state performance
 benchmark. MPS memory is sampled live allocation, not a true allocator peak.
+
+## Complete local experiment
+
+```bash
+local/precision/.venv/bin/python -m pytest -q -o addopts= tools/precision_local
+local/precision/.venv/bin/python tools/precision_local/run_suite.py \
+  --out local/precision/runs/g0-local-v1
+```
+
+The suite launches a fresh process for the audit, each of six paired training
+runs, two same-seed repeats, and two restarts from step 64. It compares complete
+final checkpoints (including numerical history) for exact replay. Manifest,
+environment, per-step results, checkpoint hashes, summary and validation curves
+are retained under the output directory. Only compact evidence is committed.
+
+The summary requires all expected audit/replay evidence and reports failed
+criteria without weakening them. Even a complete automated pass is marked
+`awaiting_review`; it never grants user acceptance. Full-run wall time is also
+affected by thermal state and experiment order, so no FP32/BF16 speed ranking is
+derived from this preliminary suite.
