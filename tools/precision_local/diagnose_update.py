@@ -5,7 +5,6 @@ import hashlib
 import json
 from pathlib import Path
 
-import torch
 from baseline import environment, error_metrics, load_data, one_step, write_json
 from model import TinyDecoder
 
