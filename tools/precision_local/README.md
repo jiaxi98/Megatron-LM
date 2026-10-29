@@ -196,3 +196,18 @@ local/precision/.venv/bin/python tools/precision_local/context_sweep.py run \
 
 The original sweep protocol and results remain unchanged. This replay neither
 introduces a new acceptance bound nor grants acceptance of either experiment.
+
+Verify the replay and attribute the stored peak gradients with:
+
+```bash
+local/precision/.venv/bin/python tools/precision_local/compare_context_replay.py \
+  local/precision/runs/context-4k-v1/context-2048-seed-43 \
+  local/precision/runs/context-2k-peak-replay-v1 --step 20 \
+  --out local/precision/runs/context-2k-peak-replay-v1/comparison.json
+```
+
+The checker fails if any original history field, validation value, final model,
+optimizer or RNG tensor changes. It checks raw-gradient metrics against the run
+log, then decomposes the total gradient difference into a same-weight arithmetic
+term and a different-weight term evaluated in BF16. Squared norms include a
+signed cross term; do not interpret them as independent additive percentages.
