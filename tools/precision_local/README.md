@@ -119,3 +119,16 @@ criteria without weakening them. Even a complete automated pass is marked
 `awaiting_review`; it never grants user acceptance. Full-run wall time is also
 affected by thermal state and experiment order, so no FP32/BF16 speed ranking is
 derived from this preliminary suite.
+
+## Diagnosing an update-error failure
+
+```bash
+local/precision/.venv/bin/python tools/precision_local/diagnose_update.py \
+  --out local/precision/runs/g0-local-update-diagnosis
+```
+
+This post-run diagnostic reruns the same single-step comparison, attributes
+update-error energy to gradient sign flips, and checks the analytic first AdamW
+update difference. Common weight decay cancels for identical initial weights.
+It reports per-parameter contributions and never alters or reclassifies the
+original acceptance threshold. Its formula is tested against FP64 AdamW.
