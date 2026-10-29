@@ -33,6 +33,34 @@ encodings, every adjacent midpoint and neighboring FP32 values, plus random
 and extreme values, checking CPU/MPS rounding and signed zero. Training replay
 must include optimizer and RNG state; current scaling has no delayed history.
 
+```bash
+local/precision/.venv/bin/python tools/precision_local/fp8_audit.py \
+  --out local/precision/runs/fp8-operators-v1
+local/precision/.venv/bin/python tools/precision_local/fp8_train.py suite \
+  --out local/precision/runs/fp8-training-v1
+local/precision/.venv/bin/python tools/precision_local/summarize_fp8.py \
+  local/precision/runs/fp8-training-v1 \
+  --operators local/precision/runs/fp8-operators-v1/result.json
+```
+
+The operator audit compares independent CPU float8 casts and FP64 products
+against MPS emulation, separating quantization from same-operand GEMM error.
+The training suite runs three arms at 128/1024/4096 byte contexts, three seeds,
+64 steps and 4,096 targets/update with identical initialization and windows.
+It records trajectory gradients each step, and same-weight gradients plus
+same-weight/same-AdamW-state updates at steps 1/16/32/64. The update comparison
+uses the actual learning rate and clipping; its values are diagnostic, with
+no newly imposed update-error threshold. Quantization statistics cover these
+probe steps only. Complete per-parameter measurements remain in result files.
+
+Each run saves step-32 and final paired checkpoints. The suite verifies exact
+fresh-process repeat and resume of all three arms at context 128, seed 17.
+The final common-FP32 evaluation disables FP8 emulation to assess learned
+weights separately from evaluation precision. The summarizer applies the
+predeclared checks, exports CSVs/plots and records either failure or
+`passed_pending_batch_review`. Run all source commits from a clean tree;
+results require new output directories and never overwrite previous evidence.
+
 This independent PyTorch reference harness runs preliminary experiments on the
 user's Apple GPU. It is not a port of Megatron/Transformer Engine to MPS and does
 not validate CUDA kernels, distributed training, native FP8, or native FP4.
