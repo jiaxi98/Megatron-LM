@@ -44,3 +44,18 @@ The local gate is **G0-local**. Its evidence includes CPU FP32 comparisons,
 paired MPS FP32/BF16 short training, repeatability, and checkpoint replay in fresh
 processes. Results must be reviewed with the user before advancing to low-precision
 experiments. The H20 G0 baseline remains pending independently of this gate.
+
+## Reference model
+
+`model.py` implements a small causal decoder with RMSNorm, rotary embeddings,
+explicit attention, SwiGLU, residual dropout and untied byte embeddings/output
+head. Normalization, softmax, residuals, loss and persistent parameters use FP32.
+BF16 autocast affects linear layers and attention matrix multiplications. No
+claim of bitwise equivalence to a Megatron model is made at this stage.
+
+```bash
+local/precision/.venv/bin/python -m pytest -q -o addopts= \
+  tools/precision_local/test_model.py
+```
+
+These standalone CPU tests run outside the upstream CUDA/distributed test tree.
