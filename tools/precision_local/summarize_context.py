@@ -148,12 +148,13 @@ def make_plots(results, protocol, summary, root):
     import numpy as np
 
     contexts = protocol["contexts"]
-    figure, axis = plt.subplots(figsize=(8.4, 4.4))
-    for key, label, marker in (
-        ("initial_matched_gradient_rel_l2", "Shared weights, step 1", "o"),
-        ("final_matched_gradient_rel_l2", "Shared weights, step 64", "s"),
-        ("final_trajectory_gradient_rel_l2", "Separate trajectories, step 64", "^"),
+    figure, axes = plt.subplots(1, 2, figsize=(11, 4.4))
+    for panel, key, label, marker in (
+        (0, "initial_matched_gradient_rel_l2", "Step 1", "o"),
+        (0, "final_matched_gradient_rel_l2", "Step 64", "s"),
+        (1, "final_trajectory_gradient_rel_l2", "Step 64", "^"),
     ):
+        axis = axes[panel]
         means = np.array([row[key]["mean"] for row in summary["by_context"]]) * 100
         lower = np.array([row[key]["min"] for row in summary["by_context"]]) * 100
         upper = np.array([row[key]["max"] for row in summary["by_context"]]) * 100
@@ -165,15 +166,20 @@ def make_plots(results, protocol, summary, root):
             capsize=3,
             label=label,
         )
-    axis.set_xscale("log", base=2)
-    axis.set_xticks(contexts, [str(n) for n in contexts])
-    axis.set(
-        xlabel="Context length (byte tokens)",
-        ylabel="Gradient relative L2 error (%)",
-        title="MPS BF16 vs FP32: mean and min-max across 3 seeds",
-    )
-    axis.grid(alpha=0.25)
-    axis.legend()
+    for axis, title in zip(
+        axes,
+        ("Shared weights: arithmetic difference", "Separate trajectories: combined difference"),
+    ):
+        axis.set_xscale("log", base=2)
+        axis.set_xticks(contexts, [str(n) for n in contexts])
+        axis.set(
+            xlabel="Context length (byte tokens)",
+            ylabel="Gradient relative L2 error (%)",
+            title=title,
+        )
+        axis.grid(alpha=0.25)
+        axis.legend()
+    figure.suptitle("MPS BF16 vs FP32: mean and min-max across 3 seeds; separate y scales")
     figure.tight_layout()
     figure.savefig(root / "gradient_vs_context.png", dpi=160)
     plt.close(figure)
@@ -223,7 +229,13 @@ def make_plots(results, protocol, summary, root):
             )
             axis.grid(alpha=0.25)
             axis.legend(fontsize=8)
-        figure.suptitle("4,096 targets/update; three seeds; shading is seed range")
+            if mode == "gradients":
+                axis.set_yscale("log")
+                axis.set_ylim(0.1, 130)
+        figure.suptitle(
+            "4,096 targets/update; three seeds; shading is seed range"
+            + ("; common log y scale" if mode == "gradients" else "")
+        )
         figure.tight_layout()
         figure.savefig(root / f"{mode}_curves.png", dpi=160)
         plt.close(figure)
