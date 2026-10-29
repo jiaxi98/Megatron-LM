@@ -1,0 +1,45 @@
+{
+  "experiment": "G0-local-context-peak-replay-v1",
+  "base_protocol": "protocol.json",
+  "base_protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+  "contexts": [
+    2048
+  ],
+  "seeds": [
+    43
+  ],
+  "steps": 64,
+  "tokens_per_update": 4096,
+  "microbatch_sequences": 1,
+  "dropout": 0.0,
+  "matched_weight_probe_steps": [
+    1,
+    8,
+    16,
+    19,
+    20,
+    21,
+    32,
+    64
+  ],
+  "eval_steps": [
+    0,
+    8,
+    16,
+    32,
+    64
+  ],
+  "validation_windows": 4,
+  "validation_tokens_per_window": 4096,
+  "save_raw_gradient_seed": 43,
+  "save_raw_gradient_steps": [
+    20
+  ],
+  "mps_memory_fraction": 0.6,
+  "data_policy": "For each step draw one common contiguous 4097-byte span. Split its 4096 input/target pairs into independent sequences of length L. Identical target tokens and window starts across all contexts and precisions for a given seed.",
+  "precision_policy": "Both arms run on MPS. FP32 persistent parameters, gradients and AdamW states; BF16 autocast for linear/attention GEMMs. Same architecture and optimizer as the base protocol. Dropout disabled in both arms to isolate precision/context effects.",
+  "gradient_policy": "Record pre-clipping accumulated gradients every optimizer step. Trajectory comparisons use each arm's own evolving weights. At declared probe steps also evaluate BF16 at the current FP32 weights on the same batch, isolating arithmetic error from trajectory drift. Record global and per-parameter norms, relative L2, cosine, maximum absolute error and sign flips.",
+  "report_policy": "Exploratory context sensitivity study; no new numerical acceptance bound. Report all values and control failures without changing or accepting the prior G0-local result. Pause for user review at completion.",
+  "limits": "Byte contexts, tiny reference model and short training only; not Megatron/TE, subword-token contexts, long-horizon convergence, or native FP8/FP4 validation. Gradient accumulation reduction order and positional resets differ across contexts.",
+  "purpose": "Post-run replay of context 2048 seed 43: add same-weight probes around the observed step-20 trajectory-gradient peak; preserve all training/data/optimizer settings and require the original numerical trajectory to reproduce exactly."
+}

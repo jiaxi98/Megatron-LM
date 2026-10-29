@@ -179,3 +179,20 @@ initialization, window identity, token budgets, step/probe coverage and finite
 gradient metrics. It exports global per-step and per-parameter probe CSVs plus
 context/trajectory/validation plots. Plot bands are min-max across three seeds,
 not confidence intervals. Numerical measurements remain awaiting user review.
+
+The initial sweep exposed a trajectory-gradient peak at context 2,048, seed 43,
+step 20. `context_peak_protocol.json` is an explicitly post-run diagnostic: it
+preserves training settings and adds matched-weight probes at steps 19/20/21.
+It saves raw gradients at step 20 for attribution. Require exact reproduction
+of the original per-step trajectory, existing probes, validation, final model,
+optimizer and RNG state before interpreting the additional measurements.
+
+```bash
+local/precision/.venv/bin/python tools/precision_local/context_sweep.py run \
+  --protocol tools/precision_local/context_peak_protocol.json \
+  --context 2048 --seed 43 \
+  --out local/precision/runs/context-2k-peak-replay-v1
+```
+
+The original sweep protocol and results remain unchanged. This replay neither
+introduces a new acceptance bound nor grants acceptance of either experiment.
