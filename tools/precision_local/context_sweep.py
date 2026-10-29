@@ -4,6 +4,7 @@ import argparse
 import copy
 import hashlib
 import json
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -288,7 +289,7 @@ def paired_run(args, protocol: dict, base: dict) -> None:
 
 def suite(args, protocol):
     args.out.mkdir(parents=True, exist_ok=False)
-    write_json(args.out / "protocol.json", protocol)
+    shutil.copyfile(args.protocol, args.out / "protocol.json")
     manifest = {
         "environment": environment(),
         "protocol_sha256": file_sha256(args.protocol),

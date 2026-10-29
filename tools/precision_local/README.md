@@ -168,3 +168,14 @@ states; the matched-weight probe never steps an optimizer or changes either
 training model. The final validation also evaluates both learned models in FP32.
 Only the step-1 initialization is shared across contexts; later FP32 reference
 weights have learned with their respective contexts and can differ.
+
+```bash
+local/precision/.venv/bin/python tools/precision_local/summarize_context.py \
+  local/precision/runs/context-4k-v1
+```
+
+The summarizer requires all declared context/seed pairs and checks source,
+initialization, window identity, token budgets, step/probe coverage and finite
+gradient metrics. It exports global per-step and per-parameter probe CSVs plus
+context/trajectory/validation plots. Plot bands are min-max across three seeds,
+not confidence intervals. Numerical measurements remain awaiting user review.
