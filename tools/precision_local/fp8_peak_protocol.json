@@ -1,0 +1,98 @@
+{
+  "experiment": "G2-local-fp8-peak-replay-v1",
+  "base_protocol": "protocol.json",
+  "base_protocol_sha256": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+  "recipe": {
+    "forward_format": "e4m3fn",
+    "gradient_format": "e5m2",
+    "scaling": "per-tensor current amax; power-of-two dequantization scale = 2**ceil(log2(amax / format_max)); zero tensors use scale 1",
+    "rounding": "nearest, ties to even; clamp finite input to representable range before rounding",
+    "nonfinite": "fail immediately; never silently replace NaN or infinity",
+    "linear_backward": "dx = Q5(dy) @ Q4(w); dw = Q5(dy).T @ Q4(x); bias gradient if present uses unquantized dy",
+    "compute": "dequantized FP32 GEMMs on MPS; not native FP8 arithmetic or TE-equivalent execution",
+    "modules": "all five linear projections in every decoder block; embedding, head, attention matmuls, norms, residuals and loss remain FP32",
+    "persistent_state": "FP32 parameters, accumulated gradients and AdamW states; current scaling is stateless"
+  },
+  "operator_shapes_m_k_n": [
+    [
+      32,
+      32,
+      48
+    ],
+    [
+      128,
+      256,
+      768
+    ],
+    [
+      512,
+      768,
+      256
+    ]
+  ],
+  "operator_seeds": [
+    17,
+    29,
+    43
+  ],
+  "operator_acceptance": {
+    "quantizer_matches_cpu_float8_cast": "exact finite values for representable values, adjacent midpoints and nextafter neighbors, extremes and seeded random inputs; signed zero checked separately",
+    "quantized_operand_gemm_vs_fp64_rel_l2": 1e-05,
+    "quantization_vs_unquantized_fp64_rel_l2": {
+      "forward": 0.08,
+      "dgrad": 0.12,
+      "wgrad": 0.12
+    },
+    "deterministic_replay": "exact outputs and gradients"
+  },
+  "training": {
+    "contexts": [
+      4096
+    ],
+    "seeds": [
+      17
+    ],
+    "steps": 64,
+    "tokens_per_update": 4096,
+    "microbatch_sequences": 1,
+    "dropout": 0.0,
+    "matched_probe_steps": [
+      1,
+      16,
+      22,
+      32,
+      64
+    ],
+    "eval_steps": [
+      0,
+      16,
+      32,
+      64
+    ],
+    "validation_windows": 4,
+    "validation_tokens_per_window": 4096,
+    "resume_step": 32,
+    "replay_context": 4096,
+    "replay_seed": 17,
+    "mps_memory_fraction": 0.6,
+    "arms": [
+      "fp32",
+      "bf16",
+      "fp8_emulated"
+    ]
+  },
+  "training_acceptance": {
+    "same_weight_global_gradient_rel_l2_max": 0.2,
+    "minimum_validation_loss_drop": 0.3,
+    "maximum_final_validation_gap_vs_fp32": 0.1,
+    "finite_losses_gradients_parameters_states": true,
+    "repeat_and_resume": "exact tensors, optimizer state, RNG, input windows and numerical history"
+  },
+  "scope": "Predeclared engineering checks for this tiny local simulation, not statistical convergence equivalence or H20/TE acceptance. FP8 training quantization error is distinct from implementation error at identical quantized operands. Do not tune bounds after measurement.",
+  "review_policy": "Passing experiments are recorded as passed_pending_batch_review and work continues; preserve failures and investigate. User acceptance is deferred.",
+  "references": [
+    "https://nvidia.github.io/TransformerEngine/features/low_precision_training/fp8_current_scaling/fp8_current_scaling.html",
+    "https://arxiv.org/abs/2209.05433"
+  ],
+  "purpose": "Post-run diagnostic of the observed context-4096 seed-17 step-22 trajectory gradient peak. Preserve training settings, add one same-weight/same-optimizer probe, and require exact reproduction of original numerical history and final states. No acceptance threshold change."
+}

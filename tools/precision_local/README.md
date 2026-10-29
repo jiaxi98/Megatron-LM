@@ -61,6 +61,23 @@ predeclared checks, exports CSVs/plots and records either failure or
 `passed_pending_batch_review`. Run all source commits from a clean tree;
 results require new output directories and never overwrite previous evidence.
 
+The first FP8 suite exposed a trajectory-gradient peak at context 4096, seed
+17, step 22. `fp8_peak_protocol.json` adds a probe at that step, preserving the
+training recipe. `fp8_replay.py` requires exact original history, validation,
+final models/optimizers/RNG and paired inputs before interpreting the extra
+probe. Its weight-dependent gradient estimate is explicitly a triangle-inequality
+bound, not a measured vector decomposition.
+
+```bash
+local/precision/.venv/bin/python tools/precision_local/fp8_train.py run \
+  --protocol tools/precision_local/fp8_peak_protocol.json \
+  --context 4096 --seed 17 --out local/precision/runs/fp8-peak-replay-v1
+local/precision/.venv/bin/python tools/precision_local/fp8_replay.py \
+  local/precision/runs/fp8-training-v1/context-4096-seed-17 \
+  local/precision/runs/fp8-peak-replay-v1 --step 22 \
+  --out local/precision/runs/fp8-peak-replay-v1/comparison.json
+```
+
 This independent PyTorch reference harness runs preliminary experiments on the
 user's Apple GPU. It is not a port of Megatron/Transformer Engine to MPS and does
 not validate CUDA kernels, distributed training, native FP8, or native FP4.
