@@ -144,6 +144,21 @@ def plots(protocol, runs, root):
     import numpy as np
 
     contexts = protocol["training"]["contexts"]
+    gradient_values = [
+        100 * row["trajectory"]["fp8_emulated"]["global"]["rel_l2"]
+        for run in runs
+        for row in run["history"]
+    ]
+    gradient_values += [
+        100 * row["matched_weights"]["global"]["rel_l2"]
+        for run in runs
+        for row in run["history"]
+        if "matched_weights" in row
+    ]
+    gradient_limits = (
+        min(value for value in gradient_values if value > 0) * 0.8,
+        max(gradient_values) * 1.25,
+    )
     for mode in ("validation", "gradients"):
         fig, axes = plt.subplots(1, len(contexts), figsize=(12, 3.9), squeeze=False)
         for axis, context in zip(axes[0], contexts):
@@ -204,9 +219,13 @@ def plots(protocol, runs, root):
             )
             if mode == "gradients":
                 axis.set_yscale("log")
+                axis.set_ylim(*gradient_limits)
             axis.legend(fontsize=7)
             axis.grid(alpha=0.2)
-        fig.suptitle("Numerical emulation; 4,096 targets/update; mean and range across 3 seeds")
+        fig.suptitle(
+            "Numerical emulation; 4,096 targets/update; mean and range across 3 seeds"
+            + ("; common log scale" if mode == "gradients" else "")
+        )
         fig.tight_layout()
         fig.savefig(root / (mode + ".png"), dpi=160)
         plt.close(fig)
