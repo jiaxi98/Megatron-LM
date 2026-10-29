@@ -132,3 +132,25 @@ update-error energy to gradient sign flips, and checks the analytic first AdamW
 update difference. Common weight decay cancels for identical initial weights.
 It reports per-parameter contributions and never alters or reclassifies the
 original acceptance threshold. Its formula is tested against FP64 AdamW.
+
+## Context-length study
+
+The user authorized extending context to 4K while recording gradient differences.
+`context_protocol.json` predeclares 128/256/512/1024/2048/4096 byte-token contexts,
+three seeds and 64 optimizer steps. Each update processes exactly 4,096 targets
+via one-sequence microbatches and gradient accumulation. For a given seed/step,
+all contexts use the same 4,097-byte source span: only its partition into causal
+contexts changes. Positions reset within each independent sequence.
+
+Dropout is disabled for both arms to keep its shape-dependent RNG behavior out
+of this comparison. Both arms run on MPS, with unchanged architecture, FP32
+parameters/optimizer states and the base precision boundaries. This is a new
+controlled experiment, not an extension of the previous dropout-enabled curves.
+
+Record two distinct gradient comparisons before clipping: actual FP32/BF16
+training trajectories at every step, and BF16 recomputation at the same FP32
+weights at steps 1/8/16/32/64. The latter isolates arithmetic differences from
+evolving-weight differences. Store global and per-parameter metrics, fixed-window
+validation curves, and selected raw gradients. No numerical threshold is chosen
+after seeing the data. The earlier 10% update criterion remains unchanged and
+unaccepted; completion of this additional study requires another user review.
