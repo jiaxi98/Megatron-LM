@@ -154,3 +154,17 @@ evolving-weight differences. Store global and per-parameter metrics, fixed-windo
 validation curves, and selected raw gradients. No numerical threshold is chosen
 after seeing the data. The earlier 10% update criterion remains unchanged and
 unaccepted; completion of this additional study requires another user review.
+
+```bash
+local/precision/.venv/bin/python tools/precision_local/context_sweep.py suite \
+  --out local/precision/runs/context-4k-v1
+```
+
+Each context/seed pair runs in a fresh process. The runner limits MPS allocation
+to 60% of Metal's recommended working-set limit. It writes per-step global and
+per-parameter pre-clipping metrics, selected raw gradients and weights (seed 17,
+steps 1 and 64), and final paired checkpoints. Both precisions use FP32 optimizer
+states; the matched-weight probe never steps an optimizer or changes either
+training model. The final validation also evaluates both learned models in FP32.
+Only the step-1 initialization is shared across contexts; later FP32 reference
+weights have learned with their respective contexts and can differ.
