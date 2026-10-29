@@ -59,3 +59,36 @@ local/precision/.venv/bin/python -m pytest -q -o addopts= \
 ```
 
 These standalone CPU tests run outside the upstream CUDA/distributed test tree.
+
+## Training and replay
+
+`baseline.py` runs FP32/BF16 training with FP32 AdamW states, an explicit warmup
+and cosine schedule, fixed validation samples, loss/gradient diagnostics and
+serialized model/optimizer/CPU/MPS/data RNG state. Unsupported MPS operations
+must fail rather than silently fall back to the CPU. The runner checks that
+projection outputs actually use the requested dtype.
+
+```bash
+local/precision/.venv/bin/python tools/precision_local/baseline.py train \
+  --dtype bf16 --seed 17 --out local/precision/manual-bf16-17
+local/precision/.venv/bin/python tools/precision_local/baseline.py train \
+  --dtype bf16 --seed 17 --resume local/precision/manual-bf16-17/step-64.pt \
+  --out local/precision/manual-bf16-17-resume
+local/precision/.venv/bin/python -m pytest -q -o addopts= \
+  tools/precision_local/test_baseline.py
+```
+
+`baseline.py audit --out <new-directory>` compares a deterministic evaluation-mode
+step on CPU FP32, MPS FP32 and MPS BF16, including gradients and AdamW parameter
+updates. This validates the local baseline, not a new low-precision recipe.
+
+All outputs require new directories. Checkpoints validate the exact protocol
+hash, seed, dtype and device before restoration. The same saved sample indices
+and initial parameter hashes establish paired-run equivalence. Final FP32
+evaluation of both learned models separates weight quality from evaluation
+precision. Both the execution-precision and FP32-evaluation loss gaps must meet
+the protocol's paired-loss bound.
+
+Elapsed time includes compilation, diagnostic synchronization, in-loop validation
+and checkpoint I/O. It is a diagnostic runtime, not a steady-state performance
+benchmark. MPS memory is sampled live allocation, not a true allocator peak.
