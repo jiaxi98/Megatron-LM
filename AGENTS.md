@@ -10,6 +10,15 @@ project. The upstream guidelines below continue to apply within this scope.
 - Use `Jiaxi Zhao <jiaxi.zhao@u.nus.edu>` for the author and committer identity of
   new project commits. Configure this per repository; do not rewrite upstream
   history. Keep the upstream sign-off and cryptographic signing requirements.
+- Make atomic commits, each covering one independently reviewable feature or
+  fix together with its relevant tests and documentation. Explain the concrete
+  behavior in the subject/body and record validation performed. Keep experiment
+  results in separate commits from the implementation that generated them.
+- The user authorized preliminary experiments on the local Apple GPU. Use the
+  isolated `tools/precision_local` reference harness and its own locked MPS
+  environment for this work; the container-only dependency/test workflow below
+  applies to the Megatron CUDA stack. Do not change the root CUDA dependency
+  graph to install the local harness. Local acceptance cannot replace H20 gates.
 - Develop on `research/fp8-h20` or task branches based on it. Push project work to
   the personal fork, `jiaxi98/Megatron-LM`. Upstream contribution instructions
   apply when an upstream contribution is requested; this research setup does

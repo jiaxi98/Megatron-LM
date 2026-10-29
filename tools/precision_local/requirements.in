@@ -1,0 +1,8 @@
+# Independent macOS reference environment; do not use the root CUDA uv overrides.
+torch==2.15.0
+numpy==2.3.4
+pytest==8.4.2
+isort==6.1.0
+black==26.3.0
+ruff==0.14.2
+matplotlib==3.10.7
