@@ -1,5 +1,38 @@
 # Local precision baseline
 
+## FP8 numerical development
+
+The updated user instruction permits continued implementation and batch review
+of passing experiments. `fp8_protocol.json` predeclares the local FP8 recipe and
+checks before scored experiments. Historical BF16/context evidence is unchanged.
+
+`fp8.py` independently emulates E4M3FN inputs/weights and E5M2 output gradients.
+The forward, input-gradient and weight-gradient GEMMs consume dequantized FP32
+operands and compute in FP32. Five projections per decoder block are replaced;
+embedding, output head, attention GEMMs, norms, residuals and loss remain FP32.
+This is a training surrogate with a manually defined quantized backward, not
+the mathematical derivative of rounding. Second derivatives are unsupported.
+
+Current scaling uses the smallest power-of-two dequantization scale that covers
+the tensor's amax. Rounding is ties-to-even with finite saturation and gradual
+FP8 subnormals. Zero tensors use scale one. Nonfinite inputs, non-normal FP32
+scales and dequantization overflow fail explicitly. Such extreme tensors are
+outside this implementation's supported scaling domain. No clamped replacement
+for a failed scale is silently introduced. Scale/amax, saturation and underflow
+statistics can be collected per module/operand.
+
+The format and current-scaling concepts follow the
+[TE current-scaling documentation](https://nvidia.github.io/TransformerEngine/features/low_precision_training/fp8_current_scaling/fp8_current_scaling.html),
+but power-of-two scales, FP32 outputs/compute and module coverage are explicit
+local choices. This code does not reproduce TE's kernels or claim native FP8
+speed or memory savings. Per-tensor scales couple tokens through amax; changing
+later tokens can slightly change earlier quantization, even with causal attention.
+
+The independent CPU oracle is PyTorch's float8 cast. Tests enumerate all finite
+encodings, every adjacent midpoint and neighboring FP32 values, plus random
+and extreme values, checking CPU/MPS rounding and signed zero. Training replay
+must include optimizer and RNG state; current scaling has no delayed history.
+
 This independent PyTorch reference harness runs preliminary experiments on the
 user's Apple GPU. It is not a port of Megatron/Transformer Engine to MPS and does
 not validate CUDA kernels, distributed training, native FP8, or native FP4.
