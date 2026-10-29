@@ -1,0 +1,323 @@
+{
+  "environment": {
+    "python": "3.12.14",
+    "torch": "2.15.0",
+    "macos": "26.6",
+    "architecture": "arm64",
+    "mps_available": true,
+    "cuda_available": false,
+    "mps_fallback": "0",
+    "mps_fast_math": "0",
+    "deterministic_algorithms": false,
+    "source_commit": "b42b3e696184c8030bb6e11567bf86fe52536f2a",
+    "working_tree": ""
+  },
+  "protocol_sha256": "a5a56ffa2f7c55c8466bc89629bc5b5a390b4bdc3a1183814dc80574aa9a0024",
+  "dependencies_sha256": "28efe1a7dd8098eb03b49d5c4ffe0102b519b637fad5b4cf33f201f4fde77565",
+  "source_files": {
+    "test_model.py": "9b45e4c6d3c65392eca12edcf19c5a987e8d1e339b12a7c9a03c8b78594d0ae9",
+    "test_summarize_context.py": "37d621916595ead5b93afebccdd14df4c30b1d6b324a42e73fa0a638a32160d8",
+    "test_diagnose_update.py": "7965d39be473d59e8f40f2646d68c0077a5689d63af4664b04734e381a69627f",
+    "baseline.py": "f925db606d1f0f62aa9653a4b8e33a18b06a94681fc42e7a87455852afb883b1",
+    "test_context_sweep.py": "90b0f56b442e6b09bea70f4b3f1da2144684d15a443804cd3745670e87d28dab",
+    "context_sweep.py": "6ac646f5bb51a777185c42dc8bf38b58526fd76c26aeeed928b5de8d09573092",
+    "test_baseline.py": "df8ce0ce8bdb5e5183fd4f74215e0de5068a8b7bccf7d72f9aa74d39f52d1114",
+    "test_context_metrics.py": "c70f15bdd8ec64eff81e7a7bc02660d86677a537205833d3af5501867932456e",
+    "model.py": "3ca1f29745b9f2c2e612acaf8bb68b1bd79068af61b5b68f3adca08113827fc6",
+    "diagnose_update.py": "d32c9646ed609c123ebc4a94f67138f17e3c90d35af7f7f6f3493fd750723adb",
+    "test_suite.py": "14add1814127882ec2c8c2eb27e0fa42e9e49681f7c73fbd9137b7279d2cb3d4",
+    "summarize_context.py": "d2edacdf503e35ee4f32db8103c10c7a30b2ec7ca14bb0f76c4684faf7d2ab86",
+    "run_suite.py": "4509367a6d36c1138e3b9f8d445a2602e01157a6ca910f921f98fa9cd1c5722a",
+    "context_metrics.py": "149694370cea8fbf3f4a3abfdd87eb96975134d012fd0631b571100a6a453954"
+  },
+  "commands": [
+    {
+      "label": "context-128-seed-17",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "128",
+        "--seed",
+        "17",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-128-seed-17"
+      ]
+    },
+    {
+      "label": "context-128-seed-29",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "128",
+        "--seed",
+        "29",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-128-seed-29"
+      ]
+    },
+    {
+      "label": "context-128-seed-43",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "128",
+        "--seed",
+        "43",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-128-seed-43"
+      ]
+    },
+    {
+      "label": "context-256-seed-17",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "256",
+        "--seed",
+        "17",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-256-seed-17"
+      ]
+    },
+    {
+      "label": "context-256-seed-29",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "256",
+        "--seed",
+        "29",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-256-seed-29"
+      ]
+    },
+    {
+      "label": "context-256-seed-43",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "256",
+        "--seed",
+        "43",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-256-seed-43"
+      ]
+    },
+    {
+      "label": "context-512-seed-17",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "512",
+        "--seed",
+        "17",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-512-seed-17"
+      ]
+    },
+    {
+      "label": "context-512-seed-29",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "512",
+        "--seed",
+        "29",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-512-seed-29"
+      ]
+    },
+    {
+      "label": "context-512-seed-43",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "512",
+        "--seed",
+        "43",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-512-seed-43"
+      ]
+    },
+    {
+      "label": "context-1024-seed-17",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "1024",
+        "--seed",
+        "17",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-1024-seed-17"
+      ]
+    },
+    {
+      "label": "context-1024-seed-29",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "1024",
+        "--seed",
+        "29",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-1024-seed-29"
+      ]
+    },
+    {
+      "label": "context-1024-seed-43",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "1024",
+        "--seed",
+        "43",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-1024-seed-43"
+      ]
+    },
+    {
+      "label": "context-2048-seed-17",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "2048",
+        "--seed",
+        "17",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-2048-seed-17"
+      ]
+    },
+    {
+      "label": "context-2048-seed-29",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "2048",
+        "--seed",
+        "29",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-2048-seed-29"
+      ]
+    },
+    {
+      "label": "context-2048-seed-43",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "2048",
+        "--seed",
+        "43",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-2048-seed-43"
+      ]
+    },
+    {
+      "label": "context-4096-seed-17",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "4096",
+        "--seed",
+        "17",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-4096-seed-17"
+      ]
+    },
+    {
+      "label": "context-4096-seed-29",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "4096",
+        "--seed",
+        "29",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-4096-seed-29"
+      ]
+    },
+    {
+      "label": "context-4096-seed-43",
+      "argv": [
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/.venv/bin/python",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_sweep.py",
+        "run",
+        "--protocol",
+        "/Users/jxxxzhao/Desktop/code/Megatron-LM/tools/precision_local/context_protocol.json",
+        "--context",
+        "4096",
+        "--seed",
+        "43",
+        "--out",
+        "local/precision/runs/context-4k-v1/context-4096-seed-43"
+      ]
+    }
+  ]
+}

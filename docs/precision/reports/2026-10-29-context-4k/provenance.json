@@ -1,0 +1,104 @@
+{
+  "status": "awaiting_review",
+  "training_source_commit": "b42b3e696184c8030bb6e11567bf86fe52536f2a",
+  "replay_source_commit": "c4177ae8db859bb033eff31db4eedaff4fdea5d7",
+  "plot_source_commit": "2108bd74760c028eefe033cd57b98c0302db129b",
+  "replay_checker_source_commit": "6d4501571ca7a8f3cd8aa6d79aea1b4514e0552c",
+  "all_training_and_replay_worktrees_clean": true,
+  "training_protocol_sha256": "a5a56ffa2f7c55c8466bc89629bc5b5a390b4bdc3a1183814dc80574aa9a0024",
+  "replay_protocol_sha256": "a869a17ed50fbbbfd4002f106cb35c68eab750c83e9b027227cd289a3651619f",
+  "replay_protocol_changes": {
+    "save_raw_gradient_steps": {
+      "original": [
+        1,
+        64
+      ],
+      "replay": [
+        20
+      ]
+    },
+    "matched_weight_probe_steps": {
+      "original": [
+        1,
+        8,
+        16,
+        32,
+        64
+      ],
+      "replay": [
+        1,
+        8,
+        16,
+        19,
+        20,
+        21,
+        32,
+        64
+      ]
+    },
+    "seeds": {
+      "original": [
+        17,
+        29,
+        43
+      ],
+      "replay": [
+        43
+      ]
+    },
+    "contexts": {
+      "original": [
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096
+      ],
+      "replay": [
+        2048
+      ]
+    },
+    "save_raw_gradient_seed": {
+      "original": 17,
+      "replay": 43
+    },
+    "experiment": {
+      "original": "G0-local-context-v1",
+      "replay": "G0-local-context-peak-replay-v1"
+    },
+    "purpose": {
+      "original": null,
+      "replay": "Post-run replay of context 2048 seed 43: add same-weight probes around the observed step-20 trajectory-gradient peak; preserve all training/data/optimizer settings and require the original numerical trajectory to reproduce exactly."
+    }
+  },
+  "dependency_lock_sha256": "28efe1a7dd8098eb03b49d5c4ffe0102b519b637fad5b4cf33f201f4fde77565",
+  "raw_suite_directory": "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/runs/context-4k-v1",
+  "raw_replay_directory": "/Users/jxxxzhao/Desktop/code/Megatron-LM/local/precision/runs/context-2k-peak-replay-v1",
+  "raw_suite_bytes": 2414327129,
+  "raw_replay_bytes": 157991293,
+  "storage_note": "Raw checkpoints and gradients are retained locally only, under gitignored local/. Compact evidence is committed to the personal fork.",
+  "evidence_sha256": {
+    "README.md": "2cc1c036dd37a9bb7008cd54e1635f2785bfbadfd6caac71884430e4375f5bce",
+    "base_protocol.json": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+    "gradient_history.csv": "5ea01c1c10481f52141a43445576f05c88e1bee62fb45a6f8aab7f6496baa14d",
+    "gradient_vs_context.png": "33a7c7c4a18ec7c8bb8f482b8639aa790636919a47d9bb7b1836630a83b899f2",
+    "gradients_curves.png": "e20dc54d7a3bc0709bdf213b82de035612775c7bfed8c4dc00cf04cd9fe546ea",
+    "manifest.json": "41be142453faeb900c088407f0e5c27f8e31721d8703606c07842574fb3334db",
+    "parameter_probes.csv": "94af036c59995fd25dc72b5f4333d60f7a94498c52019200be3620d1aaec0325",
+    "peak_protocol.json": "a869a17ed50fbbbfd4002f106cb35c68eab750c83e9b027227cd289a3651619f",
+    "peak_replay.json": "a34331edf9d099577be05ecbdfa8979f11c9f2cbfbff2a990cf05e864b669afb",
+    "protocol.json": "a5a56ffa2f7c55c8466bc89629bc5b5a390b4bdc3a1183814dc80574aa9a0024",
+    "summary.json": "f92f8f1ea911bf0293ff41a4d8eca6c6856090191e0733f53b8deabd49f4c34a",
+    "validation_curves.png": "3ff5c05735d930b196bd5982ddbea62e325dfea58c8e8d7c097a29a7483c9bf9"
+  },
+  "validation": {
+    "sweep_control_checks_passed": 115,
+    "sweep_control_checks_total": 115,
+    "prior_harness_unit_tests_passed": 34,
+    "new_replay_checker_unit_tests_passed": 8,
+    "exact_outlier_replay": true,
+    "original_raw_artifact_hashes_verified": true,
+    "figures_visually_inspected": true
+  }
+}

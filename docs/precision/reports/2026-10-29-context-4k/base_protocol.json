@@ -1,0 +1,47 @@
+{
+  "experiment": "G0-local-v1",
+  "scope": "MPS reference harness only; not Megatron/TE or H20 acceptance",
+  "dataset": {
+    "url": "https://raw.githubusercontent.com/karpathy/char-rnn/6f9487a6fe5b420b7ca9afb0d7c078e37c1d1b4e/data/tinyshakespeare/input.txt",
+    "sha256": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+    "bytes": 1115394,
+    "train_fraction": 0.9,
+    "tokenizer": "raw bytes, vocabulary 256"
+  },
+  "model": {
+    "vocab_size": 256,
+    "width": 256,
+    "heads": 4,
+    "layers": 4,
+    "ffn_width": 768,
+    "sequence_length": 128,
+    "dropout": 0.1,
+    "norm_epsilon": 1e-5,
+    "rope_theta": 10000.0
+  },
+  "training": {
+    "seeds": [17, 29, 43],
+    "steps": 128,
+    "checkpoint_step": 64,
+    "batch_size": 8,
+    "eval_batches": 4,
+    "eval_every": 32,
+    "learning_rate": 0.0006,
+    "minimum_lr_ratio": 0.1,
+    "warmup_steps": 8,
+    "weight_decay": 0.1,
+    "betas": [0.9, 0.95],
+    "epsilon": 1e-8,
+    "clip_grad_norm": 1.0,
+    "cpu_threads": 4
+  },
+  "acceptance": {
+    "fp32_vs_cpu": {"logits_rel_l2": 0.0001, "grad_rel_l2": 0.001, "update_rel_l2": 0.01},
+    "bf16_vs_cpu": {"logits_rel_l2": 0.03, "grad_rel_l2": 0.08, "update_rel_l2": 0.1},
+    "minimum_validation_loss_drop": 0.3,
+    "maximum_paired_final_validation_loss_gap": 0.1,
+    "repeat_and_resume": "exact tensors, optimizer, RNG, data indices and numerical history",
+    "all_losses_and_gradient_norms_finite": true,
+    "notes": "Predeclared engineering thresholds for a tiny local baseline, not general FP8/FP4 accuracy guarantees. Failure must be reported without relaxing thresholds."
+  }
+}
