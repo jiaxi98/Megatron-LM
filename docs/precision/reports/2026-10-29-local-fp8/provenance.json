@@ -1,0 +1,119 @@
+{
+  "status": "passed_pending_batch_review",
+  "training_source_commit": "0d80d0cd55e201b099aff1d7c2ab71e056e967d6",
+  "operator_source_commit": "7f405d5c44c616382e8c8e6410ecc6a7a3da3b42",
+  "plot_source_commit": "1814f1a33e3dd227da0b2223afe918b97b166f47",
+  "targeted_replay_source_commit": "833ecd2e56c873121f48f2ee5d85ecbbf9750299",
+  "training_and_quantizer_sources_unchanged_for_targeted_replay": true,
+  "protocol_sha256": "b424a28ea89c2b26ce433763f5f81087ea462ee2c122cd84a237a68d7a66120f",
+  "dependency_lock_sha256": "28efe1a7dd8098eb03b49d5c4ffe0102b519b637fad5b4cf33f201f4fde77565",
+  "source_files_sha256": {
+    "baseline.py": "f925db606d1f0f62aa9653a4b8e33a18b06a94681fc42e7a87455852afb883b1",
+    "compare_context_replay.py": "d43b96138d4bf074f8d3f6249e5c36f904fd1f35d3624a37ba0d712b20172e66",
+    "context_metrics.py": "149694370cea8fbf3f4a3abfdd87eb96975134d012fd0631b571100a6a453954",
+    "context_sweep.py": "6ac646f5bb51a777185c42dc8bf38b58526fd76c26aeeed928b5de8d09573092",
+    "diagnose_update.py": "d32c9646ed609c123ebc4a94f67138f17e3c90d35af7f7f6f3493fd750723adb",
+    "fp8.py": "e2c05324b539f6ba35a8d43e6470ac339f8ece9b79afca00913f44b92e613824",
+    "fp8_audit.py": "ccf8325c991f9c210110a527d07eda1f0ae711d5f4a66c78ac53b620bef7d78e",
+    "fp8_replay.py": "6a8aa18a1ce1c5f1b28bc08ec86ae258fb057f8fba772ab4e8a06738541607e5",
+    "fp8_train.py": "85bc495661aedda48f8c93e344152ba67dad36223de3174ca125cc9115c13f69",
+    "model.py": "3ca1f29745b9f2c2e612acaf8bb68b1bd79068af61b5b68f3adca08113827fc6",
+    "run_suite.py": "4509367a6d36c1138e3b9f8d445a2602e01157a6ca910f921f98fa9cd1c5722a",
+    "summarize_context.py": "276b647ab816d99893f524cd21738f045345e3a37537730b0b8841575c072ee7",
+    "summarize_fp8.py": "01d0cdde9a3077823dfc97ee88a48149b25824d8c2382a9e581c85b5426bb81c",
+    "test_baseline.py": "df8ce0ce8bdb5e5183fd4f74215e0de5068a8b7bccf7d72f9aa74d39f52d1114",
+    "test_compare_context_replay.py": "1b4f4c9a6ec77fe072a777632098c9d734eafd9e29c019359543680a7c9b933b",
+    "test_context_metrics.py": "c70f15bdd8ec64eff81e7a7bc02660d86677a537205833d3af5501867932456e",
+    "test_context_sweep.py": "90b0f56b442e6b09bea70f4b3f1da2144684d15a443804cd3745670e87d28dab",
+    "test_diagnose_update.py": "7965d39be473d59e8f40f2646d68c0077a5689d63af4664b04734e381a69627f",
+    "test_fp8.py": "cd1e1d5f6bda2a61cbbb1d56f4e22487e29a71b90ddf570ee9f0e4f148a4baca",
+    "test_fp8_replay.py": "73039a287943f67adf8ced2563e9d2eba4c9223a62cde0cfcd2e479993db02a8",
+    "test_fp8_train.py": "c9597b955be75c1d1277a0605ccfb67eff857406b1b2ddfa92fc9e448dc5db0e",
+    "test_model.py": "9b45e4c6d3c65392eca12edcf19c5a987e8d1e339b12a7c9a03c8b78594d0ae9",
+    "test_suite.py": "14add1814127882ec2c8c2eb27e0fa42e9e49681f7c73fbd9137b7279d2cb3d4",
+    "test_summarize_context.py": "37d621916595ead5b93afebccdd14df4c30b1d6b324a42e73fa0a638a32160d8",
+    "test_summarize_fp8.py": "8f6869eec9f031776da9bb7406f8d63a0a656d351cee200f4f93f20d1ec9cd1d"
+  },
+  "raw_artifacts": {
+    "local/precision/runs/fp8-training-v1/context-1024-seed-17": {
+      "result.json": "30b5c27569829c1aea5c2509e6d390ead2cc7da23720f446df179988ba91c89a",
+      "final.pt": "d94c5e8937272282ad5056b973d8a0ce597397865441a5a56a565577821e494d"
+    },
+    "local/precision/runs/fp8-training-v1/context-1024-seed-29": {
+      "result.json": "dc0d26dd7b8200f8cdbf17705592440f2bd639bec5ff081dc203abcfd1caaaf5",
+      "final.pt": "6c6f994bb397354c7f66aac7d47957f107fe2cb1b4308b4fb07ff6c5c8935055"
+    },
+    "local/precision/runs/fp8-training-v1/context-1024-seed-43": {
+      "result.json": "9bc1db1cf0c798a25d1d35c051be96ed95e0056fd6b210a749627ee9f752be9a",
+      "final.pt": "bade1e6ac8e154426617455014625c9a15274952e61db587792ac2e59a653c91"
+    },
+    "local/precision/runs/fp8-training-v1/context-128-seed-17": {
+      "result.json": "6c5759f0b97cdd1ee919aa4c12be736c129388053ebbd7fb7cebc7aa93e948a8",
+      "final.pt": "140aeb29efa5b433eb21926452b4b0c9ee66abacb1374ad0a6d69783b0e26bea"
+    },
+    "local/precision/runs/fp8-training-v1/context-128-seed-29": {
+      "result.json": "559cd56997a09bef953548e60b4e9b9b90c326dc11e463ee0f668e4af79dcb27",
+      "final.pt": "78beac3f6b1246ddaaad0a27d8b3ecb02fcec2cfbe1106151c7166cd432e06cf"
+    },
+    "local/precision/runs/fp8-training-v1/context-128-seed-43": {
+      "result.json": "a9260653936f453159d6eb6fdd466884394da368b65bd8e2ace8a2c8b8742587",
+      "final.pt": "b0f895bcf0a0ad990f407fd4f3a6dd2dade335654b5010c3e9e4c86e8427c2ce"
+    },
+    "local/precision/runs/fp8-training-v1/context-4096-seed-17": {
+      "result.json": "6ec406011993058f942d9aa823ea9bcd700eee587c4d3a6296a3a708d48ed771",
+      "final.pt": "faf872a2176388b573f472b64835bfa7aebebbf16c5fc165d543bacf1357378b"
+    },
+    "local/precision/runs/fp8-training-v1/context-4096-seed-29": {
+      "result.json": "1d18d1bfb41f8f2abb4bfe841fc9c819e58c0cce34af2c4c8c361237955ed4ea",
+      "final.pt": "605919ed12aff8f46a193e4b04e40149640cee2141d4fb932d2f6e2aa432c9aa"
+    },
+    "local/precision/runs/fp8-training-v1/context-4096-seed-43": {
+      "result.json": "16bc1b924c710b4cd1d33fbc117939129d664d06fd7c13765efb7aab2824f2de",
+      "final.pt": "b8a84635c3b45ef38f5bbcf038849697015d30488669d5aabb67bcd2432a098f"
+    },
+    "local/precision/runs/fp8-training-v1/repeat": {
+      "result.json": "6c5759f0b97cdd1ee919aa4c12be736c129388053ebbd7fb7cebc7aa93e948a8",
+      "final.pt": "140aeb29efa5b433eb21926452b4b0c9ee66abacb1374ad0a6d69783b0e26bea"
+    },
+    "local/precision/runs/fp8-training-v1/resume": {
+      "result.json": "1266656a0ab16e5f91391b0c13105e71b33fa21932b66cdead9b74e9728f07c0",
+      "final.pt": "02a111dfb8573e00dc052f692eba5573f075edbd5ab039210e77ec07ca087af5"
+    },
+    "local/precision/runs/fp8-peak-replay-v1": {
+      "result.json": "b45b6c8667b6f3ef42c574376ea6d60ced1ab1f785aad6d7240be0d3f7f4cded",
+      "final.pt": "5b22c38dd2fe089ea584a79cc54e334cb87d4255464b68c4ee1028c3518cb5d6"
+    }
+  },
+  "raw_training_bytes": 2716887065,
+  "raw_targeted_replay_bytes": 258701707,
+  "storage_note": "Raw checkpoint files are retained locally only under gitignored local/. Compact evidence is committed to the personal fork.",
+  "checks": {
+    "main_passed": 359,
+    "main_total": 359,
+    "prior_baseline_checks_passed": 126,
+    "prior_baseline_checks_total": 126,
+    "full_harness_tests_passed_before_targeted_replay": 67,
+    "additional_replay_checker_tests_passed": 2,
+    "figures_rendered_and_inspected": true,
+    "black_isort_ruff_passed": true,
+    "root_autoformatter": "Passed; no changed core/test Python files"
+  },
+  "evidence_sha256": {
+    "README.md": "f26c441bd50df229f00161b7fd3034e1a5f31ead5160964d19dd923cd60ceff3",
+    "base_protocol.json": "b29cbd4f63f52afcdb2cd100e2ce12c93772a4869368562951dbde4de96c7a82",
+    "baseline_crosscheck.json": "f4afd5df20640fb37eced324d09579615fe8f4f8050103f84ba20dac67827349",
+    "gradient_history.csv": "228bf9fd47fccb84cf6354ee592a4f00b4c8cedf246819b634614e414b451f37",
+    "gradients.png": "8a1b57076e50045d78f8f83848822c64ec47eab8bf6f5fcd000fa1b26d58b46d",
+    "manifest.json": "f147e2140dda374dc830e0c355f060f18e67822ace64575981573d5b97c46364",
+    "operators.json": "9ab4bf2a18c01b018e2a11ce22a2f67183d47674e7039220ee9e9e6a721fbc07",
+    "parameter_probes.csv": "6208fa83f8d01cd336c83e27e9de0141eb3add20efd96d3baa62cf379eb0cad0",
+    "peak_protocol.json": "a41227ae340b611c81b1b0a9cb994ecf5bcadb75971cfac200373ae24a802280",
+    "peak_replay.json": "8d855f0568de80855418564e5f8ac59aba90876ebe7875fb6051107848fa6e34",
+    "protocol.json": "b424a28ea89c2b26ce433763f5f81087ea462ee2c122cd84a237a68d7a66120f",
+    "quantization_stats.csv": "98cbd1f6c264ac3b7a4e47b5784364579f88c500db7140f52d06968143a95d16",
+    "replay.json": "29ea240cb83de06ce5e9ea280da6dea16ba3e1eb7999e2130985f9365f4347af",
+    "summary.json": "f0f396bae4afee5c55627aed21b5dfac0c4c9c562840348605d94f7b2b356cca",
+    "unit-tests.txt": "56fc7351ac30afc220d9c1857bcd5ea1281cc52ac5a0fe810c99e175814e4497",
+    "validation.png": "8094482039a0ddc10360a8587b0f391ca806524a466127924833f92fc367be29"
+  }
+}
