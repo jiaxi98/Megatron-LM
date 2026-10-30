@@ -1,5 +1,62 @@
 # H20 FP8/FP4 training research
 
+## Experiment reports after cloning
+
+All six numerical-alignment experiment categories are documented in this branch.
+They are grouped into **three report directories**, with links to the relevant
+sections for each comparison. Reports, configurations, figures, compact JSON/CSV results,
+source revisions and artifact hashes are committed to Git and can be read
+without installing PyTorch or downloading a dataset.
+
+Clone the research branch of the personal fork:
+
+```bash
+git clone --branch research/fp8-h20 https://github.com/jiaxi98/Megatron-LM.git
+cd Megatron-LM
+```
+
+Start with this file, `docs/precision/README.md`. The upstream snapshot on `main`
+does not contain this research work. On GitHub, select `research/fp8-h20` when
+browsing the fork.
+
+| # | Experiment category | Setup | Detailed report and evidence |
+| --- | --- | --- | --- |
+| 1 | FP32/BF16 single-step alignment | Identical weights/input; CPU FP32 versus MPS FP32/BF16; logits, gradients and AdamW updates | [Report section](reports/2026-10-29-local-g0/README.md#numerical-results), [metrics and checks](reports/2026-10-29-local-g0/metrics.json) |
+| 2 | FP32/BF16 short-training alignment | Context 128; 3 seeds; 128 steps per arm; validation loss and exact repeat/resume | [Report section](reports/2026-10-29-local-g0/README.md#short-training-and-exact-replay), [validation curves](reports/2026-10-29-local-g0/validation_curves.png) |
+| 3 | BF16 context-length alignment through 4K | Contexts 128/256/512/1024/2048/4096; 3 seeds; 64 steps; 4096 targets/update; same-weight and trajectory gradients | [Report section](reports/2026-10-29-context-4k/README.md#results), [summary](reports/2026-10-29-context-4k/summary.json), [gradient CSV](reports/2026-10-29-context-4k/gradient_history.csv) |
+| 4 | FP8 quantizer alignment | E4M3FN/E5M2 rounding versus independent native CPU float8 casts; encodings, midpoints, neighbors, subnormals, signed zero and extremes | [Report section](reports/2026-10-29-local-fp8/README.md#operator-and-quantizer-evidence), [test cases](../../tools/precision_local/test_fp8.py), [test execution record](reports/2026-10-29-local-fp8/unit-tests.txt) |
+| 5 | FP8 Linear operator alignment | Forward, input gradient and weight gradient; 3 matrix shapes × 3 seeds; separate quantization error from GEMM implementation error against FP64 | [Report section](reports/2026-10-29-local-fp8/README.md#operator-and-quantizer-evidence), [all operator measurements](reports/2026-10-29-local-fp8/operators.json) |
+| 6 | FP8 full-model short-training alignment | FP32/BF16/FP8-emulated arms; contexts 128/1024/4096; 3 seeds; 64 steps; same-weight gradients and same-state AdamW updates | [Report section](reports/2026-10-29-local-fp8/README.md#full-model-and-training-evidence), [summary](reports/2026-10-29-local-fp8/summary.json), [per-parameter CSV](reports/2026-10-29-local-fp8/parameter_probes.csv), [quantization statistics](reports/2026-10-29-local-fp8/quantization_stats.csv) |
+
+These are local CPU/MPS reference experiments on a small byte-level decoder.
+FP8 is numerical emulation with dequantized FP32 GEMMs; native H20/TE, FP4,
+distributed training and long-horizon convergence remain separate work.
+
+Supporting diagnostics are also committed:
+
+- [BF16 first-step AdamW update attribution](reports/2026-10-29-local-g0/README.md#failed-update-criterion-attribution)
+  and [per-parameter measurements](reports/2026-10-29-local-g0/update_diagnosis.json).
+- [BF16 2K gradient-peak replay](reports/2026-10-29-context-4k/README.md#the-2k-trajectory-outlier)
+  and [exact replay evidence](reports/2026-10-29-context-4k/peak_replay.json).
+- [FP8 4K gradient-peak replay](reports/2026-10-29-local-fp8/README.md#trajectory-peak-diagnostic),
+  [repeat/resume checks](reports/2026-10-29-local-fp8/replay.json), and
+  [unchanged FP32/BF16 baseline checks](reports/2026-10-29-local-fp8/baseline_crosscheck.json).
+
+Each report includes experimental conditions, reference definitions, thresholds,
+results, failures or limitations, provenance and reproduction instructions.
+Historical report statuses describe the decisions at the time of measurement;
+the [current review policy](#acceptance-gates) supersedes their earlier pause
+instructions without changing failed numerical criteria.
+
+**Reading versus reproducing:** all committed reports, figures and compact
+results are available immediately after cloning. Multi-GB raw checkpoints and
+some raw gradient tensors remain in the original machine's gitignored `local/`
+directory; their hashes are recorded, but those files are not downloaded by
+`git clone`. Dataset content and the Python environment are also not committed.
+To rerun experiments, follow the [isolated harness setup and commands](../../tools/precision_local/README.md)
+on compatible hardware, using new output directories. Reading reports requires
+no local GPU, and the index/report links are repository-relative.
+
 ## Project baseline
 
 | Item | Value |

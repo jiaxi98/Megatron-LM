@@ -11,6 +11,11 @@ Megatron-LM and Megatron Core
 
 <div align="left">
 
+> **Precision research in this fork:** The six numerical-alignment experiment
+> categories, detailed reports, plots and result files are indexed in
+> [the precision research documentation](docs/precision/README.md#experiment-reports-after-cloning).
+> Use the `research/fp8-h20` branch; clone instructions are included in the index.
+
 ## About
 
 This repository contains two components: **Megatron-LM** and **Megatron Core**.
